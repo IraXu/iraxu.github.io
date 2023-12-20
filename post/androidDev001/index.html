@@ -1,0 +1,448 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Android开发 - 实现Material 3 主题 -
+    X&#39; Blog</title>
+<link rel="shortcut icon" href="https://iraxu.github.io/favicon.ico" />
+<link
+  href="https://fastly.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://fastly.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://iraxu.github.io/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://iraxu.github.io/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Android开发 - 实现Material 3 主题 -
+    X&#39; Blog - Atom Feed"
+  href="https://iraxu.github.io/atom.xml" />
+
+
+
+    <meta name="description" content="
+官方文档： https://m3.material.io
+
+具体每个组件的代码示例，在 github 上：
+
+https://github.com/material-components/material-components-andro..." />
+    <meta
+      property="og:title"
+      content="Android开发 - 实现Material 3 主题 - X&#39; Blog" />
+    <meta property="og:description" content="
+官方文档： https://m3.material.io
+
+具体每个组件的代码示例，在 github 上：
+
+https://github.com/material-components/material-components-andro..." />
+    <meta property="og:type" content="articles" />
+    <meta property="og:url" content="https://iraxu.github.io/post/androidDev001/" />
+    <meta
+      property="og:image"
+      content="https://iraxu.github.io/post-images/androidDev001.png" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content="1200" />
+    <meta
+      name="twitter:title"
+      content="Android开发 - 实现Material 3 主题 - X&#39; Blog" />
+    <meta name="twitter:description" content="
+官方文档： https://m3.material.io
+
+具体每个组件的代码示例，在 github 上：
+
+https://github.com/material-components/material-components-andro..." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://iraxu.github.io/post/androidDev001/" />
+
+    <link
+      rel="stylesheet"
+      href="https://fastly.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css" />
+    <link
+      rel="stylesheet"
+      href="https://fastly.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css" />
+
+    
+    <link
+      rel="stylesheet"
+      href="https://iraxu.github.io/media/css/prism-synthwave84.css" />
+     
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/bold.woff2" as="font" type="font/woff2" crossorigin>
+  </head>
+
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <a
+        href="https://iraxu.github.io"
+        class="fixed top-0 left-0 mt-4 bg-black text-white dark:text-gray-700 dark:bg-yellow-50 dark:hover:bg-black dark:hover:text-white inline-flex p-2 pl-8 hover:text-gray-700 hover:bg-yellow-50 font-bold z-10 transition-fast animated fadeInLeft">
+        X&#39; Blog
+      </a>
+      <div class="max-w-4xl w-full mx-auto">
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
+          <h1
+            class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
+            Android开发 - 实现Material 3 主题
+          </h1>
+          
+          <img
+            src="https://iraxu.github.io/post-images/androidDev001.png"
+            alt="Android开发 - 实现Material 3 主题"
+            class="block w-full mb-8" />
+          
+          <div class="mb-8 flex flex-wrap">
+            <div class="text-gray-400 text-sm mr-4">
+              2023-12-20 · 4 min read
+            </div>
+            
+            <a
+              href="https://iraxu.github.io/tag/KRUyNhoYD/"
+              class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Android
+            </a>
+            
+            <a
+              href="https://iraxu.github.io/tag/DyFdqqaiQz/"
+              class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              开发
+            </a>
+            
+          </div>
+          <div class="markdown mb-8" v-pre><blockquote>
+<p>官方文档： <a href="https://m3.material.io">https://m3.material.io</a></p>
+<blockquote>
+<p>具体每个组件的代码示例，在 github 上：</p>
+<blockquote>
+<p><a href="https://github.com/material-components/material-components-android/tree/master/docs/components">https://github.com/material-components/material-components-android/tree/master/docs/components</a></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="material-介绍">Material 介绍</h2>
+<ol>
+<li>
+<p>什么是Material You<br>
+<font color="/#bff">Material You</font> 也称Material 3或M 3，是第三代Material Design设计语言。<br>
+Material You将颜色重新定义为更加个性化的体验，助力于构建出色且富有表现力的应用。</p>
+</li>
+<li>
+<p>什么是动态颜色<br>
+动态颜色（<font color="/#bff">Dynamic Color</font>）是Material You的关键部分，通过动态配色提取算法从用户的壁纸中派生出颜色方案，且符合无障碍使用的标准，亦或是自定义的个性化颜色方案，然后应用于系统UI和应用程序，从而让设备变得更加个性化。</p>
+</li>
+<li>
+<p>动态颜色的原理是什么<br>
+首先，从用户的壁纸上提取一种源颜色，并推算出5中关键颜色，比如primary、Secondary、Tertiary等。<br>
+然后，将每个关键颜色转化为由13种色调组成的调色板，且每种色调会生成对应的浅、深色方案。<br>
+最后，通过系统Token将从壁纸提取的颜色方案和App Theme关联起来，在DynamicColorsActivityLifecycleCallbacks中判断是否需要覆盖。</p>
+</li>
+</ol>
+<h2 id="引用方法">引用方法</h2>
+<p><a href="https://m3.material.io/libraries/mdc-android/getting-started">https://m3.material.io/libraries/mdc-android/getting-started</a><br>
+md3和 md2 引入方式是一样，但是需要：</p>
+<p>material库版本到<font color="/#bff">1.9.0</font>及以上<br>
+compileSdkVersion，targetSdkVersion设置为 <font color="/#bff">31</font>以上<br>
+使用最新的 Android Studio<br>
+具体操作如下：</p>
+<h3 id="更新gradle依赖">更新Gradle依赖</h3>
+<p>需要在<font color="/#bff">build.gradle</font>中更新Gradle依赖，在dependencies里面写入：</p>
+<pre><code class="language-kotlin">dependencies {
+    // ...
+    implementation 'com.google.android.material:material:1.9.0'
+}
+</code></pre>
+<h3 id="修改版本sdk版本">修改版本Sdk版本</h3>
+<p>在<font color="/#bff">build.gradle</font>中修改<font color="/#bff">compileSdkVersion</font>和<font color="/#bff">targetSdkVersion</font>到31及以上<br>
+build.gradle及修改 的位置<br>
+<img src="https://iraxu.github.io/post-images/1703063292393.png" alt="" loading="lazy"><br>
+将<font color="/#bff">compileSdk</font>和<font color="/#bff">targetSdk</font>改到31以及以上（如上图所示）</p>
+<h3 id="修改app主题">修改APP主题</h3>
+<p>将themes.xml的<font color="/#bff">Theme.AppCompat.<em></font>或<font color="/#bff">Theme.MaterialComponents.</em> </font>改为 <font color="/#bff">Theme.Material3.*</font></p>
+<p>推荐改为：</p>
+<ol>
+<li><font color="/#bff">Theme.Material3.DayNight</font> 有标题栏</li>
+<li><font color="/#bff">Theme.Material3.DayNight.NoActionBar</font> 没有标题栏</li>
+</ol>
+<p>themes.xml及修改 的位置<br>
+<img src="https://iraxu.github.io/post-images/1703063397600.png" alt="" loading="lazy"></p>
+<pre><code class="language-xml">    &lt;style name=&quot;XXXXXXX&quot; parent=&quot;Theme.Material3.DayNight.NoActionBar&quot;&gt;
+&lt;!--     上面name=&quot;XXXXXXX&quot; 的  XXXXXXX改成自己的原来的   --&gt;
+&lt;!--        中间不需要写内容   --&gt;
+    &lt;/style&gt;
+</code></pre>
+<p>设置为<font color="/#bff">Theme.Material3.*</font> 后部分组件便会自动变成 Material3 样式：</p>
+<pre><code class="language-xml">&lt;Button → MaterialButton
+&lt;CheckBox → MaterialCheckBox
+&lt;RadioButton → MaterialRadioButton
+&lt;TextView → MaterialTextView
+&lt;AutoCompleteTextView → MaterialAutoCompleteTextView
+</code></pre>
+<h3 id="使用动态取色">使用动态取色</h3>
+<p>我们过去在使用颜色时可能是硬编码，比如这样：</p>
+<pre><code class="language-xml">android:background=&quot;@color/colorPrimary&quot;
+</code></pre>
+<p>启用md3后，应改为动态访问的方式，比如：</p>
+<pre><code class="language-xml">android:background=&quot;?attr/colorPrimary&quot;
+</code></pre>
+<p>至此已经可以在Android 12+ 上试试动态颜色的效果了</p>
+<h2 id="动态取色选取">动态取色选取</h2>
+<p>颜色的选取建议参考 <a href="https://m3.material.io/styles/color/roles/color-roles">官方文档</a>，下面进行简述：</p>
+<p>颜色分为：</p>
+<ul>
+<li>Primary 主色 ； Secondary 次级色 ； Tertiary 第三位的</li>
+<li>Error</li>
+<li>Outline</li>
+<li>Background</li>
+<li>Surface<br>
+而且日间模式和夜间模式，对应的颜色会自动调整。 当然，这些颜色也可以根据自己的需要进行调整。</li>
+</ul>
+<p>对于颜色的选取参考：</p>
+<ul>
+<li>Primary: 例如，主按钮的背景色</li>
+<li>On Primary: 例如，主按钮上的文字颜色</li>
+<li>Primary Container: 这个我理解不了，比主按钮稍弱一点的按钮？那 Secondary 还有必要么？- applied to elements needing less emphasis than primary</li>
+<li>On Primary Container</li>
+<li>Inverse Primary: 就是跟背景色对比强烈的颜色。For example, snackbars use the reverse color mapping to bring attention to an alert.</li>
+</ul>
+<blockquote>
+<p>版权声明：本文为博主「AloofXu」的原创文章，遵循CC 4.0 BY-SA版权协议。</p>
+</blockquote>
+</div>
+          <!-- Share to Twitter, Weibo, Telegram -->
+          <div class="flex items-center">
+            <div class="mr-4 flex items-center">
+              <i class="ri-share-forward-line text-gray-500"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-blue-500 hover:bg-blue-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToTwitter">
+              <i class="ri-twitter-line"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-red-500 hover:bg-red-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToWeibo">
+              <i class="ri-weibo-line"></i>
+            </div>
+            <div
+              class="px-4 cursor-pointer text-indigo-500 hover:bg-indigo-100 dark:hover:bg-gray-600 inline-flex"
+              @click="shareToTelegram">
+              <i class="ri-telegram-line"></i>
+            </div>
+          </div>
+        </div>
+
+          <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  产品要么是剽窃，要么是革命
+</footer>
+
+      </div>
+
+      <!-- TOC Container -->
+      <div
+        class="fixed right-0 bottom-0 mb-16 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white dark:bg-gray-500 dark:text-gray-200 hover:shadow-lg transition-all animated fadeInRight"
+        @click="showToc = true">
+        <i class="ri-file-list-line"></i>
+      </div>
+
+      <div
+        class="fixed right-0 top-0 bottom-0 overflow-y-auto w-64 bg-white dark:bg-gray-800 p-4 border-l border-gray-100 dark:border-gray-600 z-10 transition-fast"
+        :class="{ '-mr-64': !showToc }">
+        <div class="flex mb-4 justify-end">
+          <div
+            class="w-8 h-8 inline-flex justify-center items-center rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-fast"
+            @click="showToc = false">
+            <i class="ri-close-line text-lg"></i>
+          </div>
+        </div>
+        <div class="post-toc-container"><ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#material-%E4%BB%8B%E7%BB%8D">Material 介绍</a></li>
+<li><a href="#%E5%BC%95%E7%94%A8%E6%96%B9%E6%B3%95">引用方法</a>
+<ul>
+<li><a href="#%E6%9B%B4%E6%96%B0gradle%E4%BE%9D%E8%B5%96">更新Gradle依赖</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E7%89%88%E6%9C%ACsdk%E7%89%88%E6%9C%AC">修改版本Sdk版本</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9app%E4%B8%BB%E9%A2%98">修改APP主题</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E5%8F%96%E8%89%B2">使用动态取色</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8A%A8%E6%80%81%E5%8F%96%E8%89%B2%E9%80%89%E5%8F%96">动态取色选取</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      </div>
+
+      <!-- Back to top -->
+      <div
+        class="fixed right-0 bottom-0 mb-4 mr-4 shadow w-8 h-8 rounded-full flex justify-center items-center z-10 cursor-pointer bg-white hover:shadow-lg transition-all dark:bg-gray-500 dark:text-gray-200"
+        @click="backToUp"
+        v-show="scrolled">
+        <i class="ri-arrow-up-line"></i>
+      </div>
+    </div>
+
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- Background of PhotoSwipe.
+        It's a separate element as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg"></div>
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap">
+    <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <!--  Controls are self-explanatory. Order can be changed. -->
+        <div class="pswp__counter"></div>
+        <button
+          class="pswp__button pswp__button--close"
+          title="Close (Esc)"></button>
+        <button
+          class="pswp__button pswp__button--fs"
+          title="Toggle fullscreen"></button>
+        <button
+          class="pswp__button pswp__button--zoom"
+          title="Zoom in/out"></button>
+        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+        <!-- element will get class pswp__preloader--active when preloader is running -->
+        <div class="pswp__preloader">
+          <div class="pswp__preloader__icn">
+            <div class="pswp__preloader__cut">
+              <div class="pswp__preloader__donut"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
+      </div>
+      <button
+        class="pswp__button pswp__button--arrow--left"
+        title="Previous (arrow left)"></button>
+      <button
+        class="pswp__button pswp__button--arrow--right"
+        title="Next (arrow right)"></button>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <script src="https://fastly.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://iraxu.github.io/media/scripts/main.js"></script>
+
+    <!-- Code Highlight -->
+    
+    <script src="https://iraxu.github.io/media/prism.js"></script>
+    <script>
+      Prism.highlightAll()
+    </script>
+    
+
+    <script src="https://fastly.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+    <script src="https://fastly.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+    <script>
+      //拿到预览框架，也就是上面的html代码
+      var pswpElement = document.querySelectorAll('.pswp')[0]
+      //定义图片数组变量
+      var imgitems
+      /**
+       * 用于显示预览界面
+       * @param index 图片数组下标
+       */
+      function viewImg(index) {
+        //其它选项这里不做过多阐述，详情见官网
+        var pswpoptions = {
+          index: parseInt(index, 10), // 开始幻灯片索引。0是第一张幻灯片。必须是整数，而不是字符串。
+          bgOpacity: 0.7, // 背景透明度，0-1
+          maxSpreadZoom: 3, // 缩放级别，不要太大
+        }
+        //初始化并打开PhotoSwipe，pswpElement对应上面预览框架，PhotoSwipeUI_Default为皮肤，imgitems为图片数组，pswpoptions为选项
+        var gallery = new PhotoSwipe(
+          pswpElement,
+          PhotoSwipeUI_Default,
+          imgitems,
+          pswpoptions
+        )
+        gallery.init()
+      }
+      /**
+       * 用于添加图片点击事件
+       * @param img 图片元素
+       * @param index 所属下标（在imgitems中的位置）
+       */
+      function addImgClick(img, index) {
+        img.onclick = function () {
+          viewImg(index)
+        }
+      }
+      /**
+       * 轮询所有图片，获取src、width、height等数据，加入imgitems，并给图片元素添加事件
+       * 最好在onload中执行该方法，本站因放在最底部，所以直接初始化
+       * 异步加载图片可在图片元素创建完成后调用此方法
+       */
+      function initImg() {
+        //重置图片数组
+        imgitems = []
+        //查找class:markdown 下的所有img元素并遍历
+        var imgs = document.querySelectorAll('.markdown img')
+        for (var i = 0; i < imgs.length; i++) {
+          var img = imgs[i]
+          //本站相册初始为loading图片，真实图片放在data-src
+          var ds = img.getAttribute('data-src')
+          //创建image对象，用于获取图片宽高
+          var imgtemp = new Image()
+          //判断是否存在data-src
+          if (ds != null && ds.length > 0) {
+            imgtemp.src = ds
+          } else {
+            imgtemp.src = img.src
+          }
+          //判断是否存在缓存
+          if (imgtemp.complete) {
+            var imgobj = {
+              src: imgtemp.src,
+              w: imgtemp.width,
+              h: imgtemp.height,
+            }
+            imgitems[i] = imgobj
+            addImgClick(img, i)
+          } else {
+            console.log('进来了2')
+            imgtemp.index = i
+            imgtemp.img = img
+            imgtemp.onload = function () {
+              var imgobj = {
+                src: this.src,
+                w: this.width,
+                h: this.height,
+              }
+              //不要使用push，因为onload前后顺序会不同
+              imgitems[this.index] = imgobj
+              //添加点击事件
+              addImgClick(this.img, this.index)
+            }
+          }
+        }
+      }
+      //初始化
+      initImg()
+    </script>
+     
+  </body>
+</html>

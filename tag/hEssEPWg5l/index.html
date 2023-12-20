@@ -1,0 +1,154 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>X&#39; Blog</title>
+<link rel="shortcut icon" href="https://iraxu.github.io/favicon.ico" />
+<link
+  href="https://fastly.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://fastly.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://iraxu.github.io/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://iraxu.github.io/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="X&#39; Blog - Atom Feed"
+  href="https://iraxu.github.io/atom.xml" />
+
+
+
+    <meta name="description" content="金风玉露一相逢，便胜却人间无数" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/bold.woff2" as="font" type="font/woff2" crossorigin>
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="/post/about"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      关于
+    </a>
+    
+    <a
+      href="https://iraxu.github.io/atom.xml"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      RSS
+    </a>
+  </nav>
+</div>
+
+
+      <div class="max-w-4xl w-full mx-auto pt-32">
+        <h1 class="text-2xl font-bold pb-8 flex justify-center items-center">
+          <i class="ri-hashtag"></i>
+          黑苹果
+        </h1>
+        <div
+          class="shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+<div
+  class="p-8 border-b border-gray-200 dark:border-gray-700 flex relative overflow-hidden flex-col md:flex-row animated fadeIn">
+  
+  <div class="flex-1 order-2 md:order-1">
+    <h2 class="text-2xl font-semibold mb-4">
+      <a
+        href="https://iraxu.github.io/post/Chat_Hackintosh/"
+        class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+        碎碎念 - 黑苹果主机规划
+      </a>
+    </h2>
+    <div class="mb-4 text-xs text-gray-500">2023-12-18</div>
+    <div class="mb-4 text-gray-500 dark:text-gray-300">
+      准备组一台AMD的黑苹果主机用于办公，暂定配置如下
+系统配置
+
+
+
+规格
+详细信息
+
+
+
+
+CPU
+AMD Ryzen 7 5800H
+
+
+RAM
+Asgard DDR4 16G 3200MHz *2
+
+
+SSD 1
+HITAI TI600...
+    </div>
+    <a href="https://iraxu.github.io/post/Chat_Hackintosh/" class="btn">
+      Read more
+    </a>
+  </div>
+  
+  <img
+    class="flex-shrink-0 self-start md:ml-4 mb-4 md:mb-0 rounded-sm object-cover featured-img order-1 md:order-2 w-full h-40 md:w-56 md:h-32"
+    loading="lazy"
+    src="https://iraxu.github.io/post-images/Chat_Hackintosh.png"
+    alt="碎碎念 - 黑苹果主机规划" />
+  
+</div>
+
+
+        </div>
+
+        
+ <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  产品要么是剽窃，要么是革命
+</footer>
+
+      </div>
+    </div>
+    <script src="https://fastly.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://iraxu.github.io/media/scripts/main.js"></script>
+  </body>
+</html>

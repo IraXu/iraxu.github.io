@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://iraxu.github.io</id>
+    <title>X&apos; Blog</title>
+    <updated>2023-12-20T10:11:47.455Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://iraxu.github.io"/>
+    <link rel="self" href="https://iraxu.github.io/atom.xml"/>
+    <subtitle>金风玉露一相逢，便胜却人间无数</subtitle>
+    <logo>https://iraxu.github.io/images/avatar.png</logo>
+    <icon>https://iraxu.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, X&apos; Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[Android开发 - 实现Material 3 主题]]></title>
+        <id>https://iraxu.github.io/post/androidDev001/</id>
+        <link href="https://iraxu.github.io/post/androidDev001/">
+        </link>
+        <updated>2023-12-20T07:57:32.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>官方文档： <a href="https://m3.material.io">https://m3.material.io</a></p>
+<blockquote>
+<p>具体每个组件的代码示例，在 github 上：</p>
+<blockquote>
+<p><a href="https://github.com/material-components/material-components-android/tree/master/docs/components">https://github.com/material-components/material-components-android/tree/master/docs/components</a></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="material-介绍">Material 介绍</h2>
+<ol>
+<li>
+<p>什么是Material You<br>
+<font color="/#bff">Material You</font> 也称Material 3或M 3，是第三代Material Design设计语言。<br>
+Material You将颜色重新定义为更加个性化的体验，助力于构建出色且富有表现力的应用。</p>
+</li>
+<li>
+<p>什么是动态颜色<br>
+动态颜色（<font color="/#bff">Dynamic Color</font>）是Material You的关键部分，通过动态配色提取算法从用户的壁纸中派生出颜色方案，且符合无障碍使用的标准，亦或是自定义的个性化颜色方案，然后应用于系统UI和应用程序，从而让设备变得更加个性化。</p>
+</li>
+<li>
+<p>动态颜色的原理是什么<br>
+首先，从用户的壁纸上提取一种源颜色，并推算出5中关键颜色，比如primary、Secondary、Tertiary等。<br>
+然后，将每个关键颜色转化为由13种色调组成的调色板，且每种色调会生成对应的浅、深色方案。<br>
+最后，通过系统Token将从壁纸提取的颜色方案和App Theme关联起来，在DynamicColorsActivityLifecycleCallbacks中判断是否需要覆盖。</p>
+</li>
+</ol>
+<h2 id="引用方法">引用方法</h2>
+<p><a href="https://m3.material.io/libraries/mdc-android/getting-started">https://m3.material.io/libraries/mdc-android/getting-started</a><br>
+md3和 md2 引入方式是一样，但是需要：</p>
+<p>material库版本到<font color="/#bff">1.9.0</font>及以上<br>
+compileSdkVersion，targetSdkVersion设置为 <font color="/#bff">31</font>以上<br>
+使用最新的 Android Studio<br>
+具体操作如下：</p>
+<h3 id="更新gradle依赖">更新Gradle依赖</h3>
+<p>需要在<font color="/#bff">build.gradle</font>中更新Gradle依赖，在dependencies里面写入：</p>
+<pre><code class="language-kotlin">dependencies {
+    // ...
+    implementation 'com.google.android.material:material:1.9.0'
+}
+</code></pre>
+<h3 id="修改版本sdk版本">修改版本Sdk版本</h3>
+<p>在<font color="/#bff">build.gradle</font>中修改<font color="/#bff">compileSdkVersion</font>和<font color="/#bff">targetSdkVersion</font>到31及以上<br>
+build.gradle及修改 的位置<br>
+<img src="https://iraxu.github.io/post-images/1703063292393.png" alt="" loading="lazy"><br>
+将<font color="/#bff">compileSdk</font>和<font color="/#bff">targetSdk</font>改到31以及以上（如上图所示）</p>
+<h3 id="修改app主题">修改APP主题</h3>
+<p>将themes.xml的<font color="/#bff">Theme.AppCompat.<em></font>或<font color="/#bff">Theme.MaterialComponents.</em> </font>改为 <font color="/#bff">Theme.Material3.*</font></p>
+<p>推荐改为：</p>
+<ol>
+<li><font color="/#bff">Theme.Material3.DayNight</font> 有标题栏</li>
+<li><font color="/#bff">Theme.Material3.DayNight.NoActionBar</font> 没有标题栏</li>
+</ol>
+<p>themes.xml及修改 的位置<br>
+<img src="https://iraxu.github.io/post-images/1703063397600.png" alt="" loading="lazy"></p>
+<pre><code class="language-xml">    &lt;style name=&quot;XXXXXXX&quot; parent=&quot;Theme.Material3.DayNight.NoActionBar&quot;&gt;
+&lt;!--     上面name=&quot;XXXXXXX&quot; 的  XXXXXXX改成自己的原来的   --&gt;
+&lt;!--        中间不需要写内容   --&gt;
+    &lt;/style&gt;
+</code></pre>
+<p>设置为<font color="/#bff">Theme.Material3.*</font> 后部分组件便会自动变成 Material3 样式：</p>
+<pre><code class="language-xml">&lt;Button → MaterialButton
+&lt;CheckBox → MaterialCheckBox
+&lt;RadioButton → MaterialRadioButton
+&lt;TextView → MaterialTextView
+&lt;AutoCompleteTextView → MaterialAutoCompleteTextView
+</code></pre>
+<h3 id="使用动态取色">使用动态取色</h3>
+<p>我们过去在使用颜色时可能是硬编码，比如这样：</p>
+<pre><code class="language-xml">android:background=&quot;@color/colorPrimary&quot;
+</code></pre>
+<p>启用md3后，应改为动态访问的方式，比如：</p>
+<pre><code class="language-xml">android:background=&quot;?attr/colorPrimary&quot;
+</code></pre>
+<p>至此已经可以在Android 12+ 上试试动态颜色的效果了</p>
+<h2 id="动态取色选取">动态取色选取</h2>
+<p>颜色的选取建议参考 <a href="https://m3.material.io/styles/color/roles/color-roles">官方文档</a>，下面进行简述：</p>
+<p>颜色分为：</p>
+<ul>
+<li>Primary 主色 ； Secondary 次级色 ； Tertiary 第三位的</li>
+<li>Error</li>
+<li>Outline</li>
+<li>Background</li>
+<li>Surface<br>
+而且日间模式和夜间模式，对应的颜色会自动调整。 当然，这些颜色也可以根据自己的需要进行调整。</li>
+</ul>
+<p>对于颜色的选取参考：</p>
+<ul>
+<li>Primary: 例如，主按钮的背景色</li>
+<li>On Primary: 例如，主按钮上的文字颜色</li>
+<li>Primary Container: 这个我理解不了，比主按钮稍弱一点的按钮？那 Secondary 还有必要么？- applied to elements needing less emphasis than primary</li>
+<li>On Primary Container</li>
+<li>Inverse Primary: 就是跟背景色对比强烈的颜色。For example, snackbars use the reverse color mapping to bring attention to an alert.</li>
+</ul>
+<blockquote>
+<p>版权声明：本文为博主「AloofXu」的原创文章，遵循CC 4.0 BY-SA版权协议。</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[软件测试 - PC客户端的挂测脚本]]></title>
+        <id>https://iraxu.github.io/post/Test001/</id>
+        <link href="https://iraxu.github.io/post/Test001/">
+        </link>
+        <updated>2023-12-20T01:34:56.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="主要用于目前2023年就职公司的pc客户端程序的稳定性挂测任务">主要用于目前（2023年）就职公司的PC客户端程序的稳定性挂测任务</h2>
+<p>同样适用于其他PC客户端程序<br>
+<strong>要求</strong>：</p>
+<ol>
+<li>自动打开指定程序</li>
+<li>检测程序运行状态，若检测到不在运行（闪退等场景），则重启程序</li>
+<li>打印每一次启动程序的时间、程序异常退出的时间、稳定运行的时长</li>
+<li>稳定运行Xmin后，打印当前程序的系统资源占用率</li>
+</ol>
+<h3 id="方法一获取当前鼠标的x轴-y轴坐标">方法一：获取当前鼠标的X轴、Y轴坐标</h3>
+<pre><code class="language-python">import pyautogui
+import time
+
+# 用于获取鼠标当前位置
+def get_mouse_position():
+    while True:
+        position = pyautogui.position()  # 获取鼠标当前位置
+        print(f'当前鼠标位置: X轴: {position.x}, Y轴: {position.y}')
+        time.sleep(1.5)  # 等待1.5秒后再次获取位置
+
+get_mouse_position()
+</code></pre>
+<h3 id="方法二挂测执行脚本">方法二：挂测执行脚本</h3>
+<pre><code class="language-python">import subprocess
+import time
+from datetime import datetime
+import os
+import psutil
+import pyautogui
+
+'''
+    --脚本用于挂测PC客户端稳定性并检测系统性能占用--
+    脚本运行的前提条件：
+    1、程序已登录并记录账号
+    2、程序分屏根据挂测要求切换合适的分屏
+'''
+
+
+def get_system_performance():
+    cpu_percent = psutil.cpu_percent()
+    memory_info = psutil.virtual_memory().percent
+    disk_info = psutil.disk_usage('/').percent
+
+    performance_data = {
+        f&quot;CPU占用率{cpu_percent}%&quot;,
+        f&quot;内占用率{memory_info}%&quot;,
+        f&quot;磁盘占用率{disk_info}%&quot;,
+    }
+
+    return performance_data
+
+
+'''
+    下方代码定义了一个名为 start_program 的函数，该函数用于启动一个指定的程序
+    函数的参数是一个字符串 program_path，表示要启动的程序的路径
+    函数的主要逻辑是使用 subprocess.Popen 函数来启动指定的程序
+    subprocess.Popen 函数可以创建一个新的进程，并执行指定的命令或程序
+    在这里，program_path 表示要启动的程序的路径，shell=True 表示在 shell 环境下执行命令
+    如果在启动程序过程中发生异常，函数会捕获异常并打印错误信息，如果程序无法启动，则会打印相应的错误信息
+'''
+def start_program(program_path):
+    try:
+        subprocess.Popen(program_path, shell=True)
+    except Exception as e:
+        print(f&quot;Error starting program: {e}&quot;)
+
+
+'''
+    下方代码定义了一个名为 is_program_running 的函数，该函数检查指定的程序是否正在运行
+    函数的参数是一个字符串 program_name，表示要检查的程序的名称
+    函数的主要逻辑是使用 subprocess.run 函数来执行 Windows 命令行命令 tasklist，并传递一个过滤条件 /FI IMAGENAME eq {program_name}，这个条件会筛选出与指定程序名称匹配的进程
+    subprocess.run 函数的 capture_output=True 参数用于捕获命令的输出结果，text=True 参数用于将输出结果解析为文本格式
+    函数返回一个布尔值，如果输出结果中包含指定程序名称（不区分大小写），则返回 True，表示程序正在运行；否则返回 False，表示程序未运行
+    如果在执行命令过程中发生异常，函数会打印错误信息并返回 False
+'''
+def is_program_running(program_name):
+    try:
+        result = subprocess.run(['tasklist', '/FI', f'IMAGENAME eq {program_name}'], capture_output=True, text=True)
+        return program_name.lower() in result.stdout.lower()
+    except Exception as e:
+        print(f&quot;Error checking if program is running: {e}&quot;)
+        return False
+
+
+def write_to_file(file_path, content):
+    with open(file_path, 'a') as file:
+        file.write(content + '\n')
+
+
+def click_coordinates(coordinates):  # 用于双击设备列表进行点播
+    for coord in coordinates:
+        pyautogui.doubleClick(coord[0], coord[1])
+        time.sleep(1)  # 指定的屏幕坐标进行双击操作，且每次点击间隔1s
+
+
+def click(bitstream):  # 用于单击码流切换按钮
+    for coord in bitstream:
+        pyautogui.click(coord[0], coord[1])
+        time.sleep(1)  # 指定的屏幕坐标进行单击操作，且每次点击间隔1s
+
+
+def main():
+    # 设置程序所在路径
+    program_path = r'D:\Program Files (x86)\牵心Pro\qianxinpro.exe'
+
+    # 获取桌面路径
+    desktop_path = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+
+    # 创建日志文件路径
+    log_file_path = os.path.join(desktop_path, 'program_log.txt')
+
+    last_start_time = None  # 上次启动时间
+
+    while True:
+        # 记录程序启动时间
+        start_time = datetime.now()
+        start_time_str = start_time.strftime('%Y-%m-%d %H:%M:%S')
+
+        if last_start_time is not None:
+            # 计算上次启动到重启的正常运行时长
+            run_duration = start_time - last_start_time
+            run_duration_str = str(run_duration)
+            print(f&quot;程序正常运行时长：{run_duration_str}&quot;)
+            print(f&quot;-----------------------------------&quot;)
+            write_to_file(log_file_path, f&quot;程序正常运行时长：{run_duration_str}\n&quot;)
+
+        print(f&quot;程序启动时间：{start_time_str}&quot;)
+        write_to_file(log_file_path, f&quot;程序启动时间：{start_time_str}&quot;)
+
+        # 启动程序
+        start_program(program_path)
+        time.sleep(2)
+
+        # 模拟点击坐标点 -- 点播设备
+        coordinates = [(150, 376), (150, 458), (150, 508), (150, 550), (150, 597), (150, 735), (150, 971), (150, 1011), (150, 1059)]
+        click_coordinates(coordinates)
+        print('设备点播完成')
+        time.sleep(1)
+
+        # 模拟点击坐标点 -- 切换至[超清]
+        bitstream = [(773, 469), (773, 889), (773, 1300), (1522, 469), (1522, 889), (1522, 1300), (2269, 469), (2269, 889), (2269, 1300)]
+        click(bitstream)
+        print('码流切换完成')
+
+        # 保存当前启动时间
+        last_start_time = start_time
+
+        '''
+            使用循环+计数器：
+            每隔5秒检测一次程序是否在运行，如果检测程序在运行则计数器+1，当计数器到360（即1800s = 30min）时，打印当前系统的资源占用情况
+            每次打印完，计数器归零，重新开始计数循环；
+            如果检测到程序不在运行，则跳出循环，执行最下方的【记录异常退出时间】并重新执行main方法
+        '''
+        count = 0
+        program_running = True
+        while program_running:
+            if is_program_running(&quot;qianxinpro.exe&quot;):
+                count += 1
+                time.sleep(5)  # 每隔5秒检测程序是否在运行，理论上时间间隔越小误差越小
+                if count == 360:
+                    performance_data_str = get_system_performance()
+                    print(f&quot;{performance_data_str}&quot;)
+                    write_to_file(log_file_path, f&quot;已稳定运行30min，当前系统资源占用→：{performance_data_str}&quot;)
+                    count = 0
+            else:
+                break
+
+        # 记录异常退出时间
+        exit_time = datetime.now()
+        exit_time_str = exit_time.strftime('%Y-%m-%d %H:%M:%S')
+        print(f&quot;检测到Crash→重启ing→时间：{exit_time_str}&quot;)
+        write_to_file(log_file_path, f&quot;检测到Crash→重启ing→时间：{exit_time_str}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="补充将自动化脚本打包成exe可执行程序">补充：将自动化脚本打包成.exe可执行程序</h2>
+<p><strong>使用pyinstaller打包</strong><br>
+通常适用于简单的项目，不需要复杂的配置或自定义设置，也无需频繁重复打包的情况；假设我们的python代码如下，文件名为demo.py。</p>
+<pre><code class="language-python">#demo.py
+import os
+path=os.getcwd()
+print(f'当前文件路径：{path}')
+os.system('pause')
+</code></pre>
+<h3 id="打包步骤">打包步骤：</h3>
+<ol>
+<li>在cmd终端中进入demo.py文件的所在目录。</li>
+<li>终端执行：pyinstaller -F demo.py</li>
+</ol>
+<h3 id="指令解释">指令解释：</h3>
+<pre><code class="language-python">pyinstaller
+[-F/-D]       # [产生当个可执行文件/产生一个目录（包含多个文件）作为可执行文件]
+[-w/-c]       # [去掉命令行弹窗/显示命令行弹窗]
+-i icon.ico   # 指定exe显示图标
+demo.py     #打包的python文件
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 产品思维]]></title>
+        <id>https://iraxu.github.io/post/pm0007/</id>
+        <link href="https://iraxu.github.io/post/pm0007/">
+        </link>
+        <updated>2023-12-20T01:31:12.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>都说在面试中要用产品思维来回答面试官的问题，或者在平时思考问题也要用产品思维来思考。那么，这篇博客就来讲讲产品思维到底是什么吧。<br>
+参考链接：https://zhuanlan.zhihu.com/p/183833093</p>
+</blockquote>
+<h2 id="一-什么是产品思维">一、什么是产品思维</h2>
+<p>把产品思维拆开两个词语来理解：</p>
+<ul>
+<li>产品：产品是满足用户需求、解决用户问题的载体，是一系列功能的集合。</li>
+<li>思维：思维是思考问题的方式，不同的人因为经历和经验不同，思考问题的方式也不同。</li>
+</ul>
+<p>那么综合起来可以理解为：产品思维是一种<mark>解决问题</mark>的综合思维，是进一步把问题<mark>解决方案产品化</mark>的过程。</p>
+<h2 id="二-解决问题">二、解决问题</h2>
+<p>解决问题可以分成三个步骤：<font color="/#bff">发现问题、分析问题、解决问题</font>。</p>
+<p>解决方案产品化就相当于<font color="/#bff">标准化</font>的过程。</p>
+<h3 id="1发现问题问题是什么">1.发现问题：问题是什么？</h3>
+<p>一般会<font color="/#bff">“用户思维”和“数据思维”</font>来发现问题的本质。</p>
+<ul>
+<li>用户思维：最重要的一种思维方式，因为一切产品的起点都是用户获益。需要把我去掉，完完全全站在用户的角度去思考，甚至要站在完全小白的角度去思考。</li>
+<li>数据思维：通过数据分析发现问题。</li>
+</ul>
+<h3 id="2分析问题为什么会产生这个问题">2.分析问题：为什么会产生这个问题？</h3>
+<p>一般会用<font color="/#bff">“本质思维”</font>。</p>
+<ul>
+<li>本质思维：是一种寻根究底、找出问题根本原因的思维。
+<ul>
+<li>可以采用“4W、1H”的方式；</li>
+<li>根源分析法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3解决问题如何解决这个问题">3.解决问题：如何解决这个问题？</h3>
+<p>一般会用“效率思维”</p>
+<ul>
+<li>效率思维：商业的发展发向，一定是向着更高效率的方向发展的。</li>
+</ul>
+<h2 id="三-解决方案产品化">三、解决方案产品化</h2>
+<p>简单来说就是标准化的一个过程。</p>
+<ul>
+<li>标准化：通过<font color="/#bff">归纳提炼，总结共性</font>，最终落地为产品、产品功能、服务或者SOP（Standard Operating Procedure标准作业程序）的方式，进行自动化、规模化解决同一类问题。</li>
+</ul>
+<p>总结起来就是：通过用户思维、数据思维去发现问题。通过本质思维去分析问题，通过效率思维去解决问题。最后通过标准化方法将解决问题的方案产品化。</p>
+<p>————————————————</p>
+<h2 id="四-补充">四、补充</h2>
+<p>产品思维也是一种从用户、场景、触达等转化链路出发，完成目标的思考方式。</p>
+<p>一般思考步骤：</p>
+<p>step1：产品需求层次。</p>
+<p>一般都会深入到马斯洛需求层次理论。（<font color="/#bff">越接近需求层次底端的产品越容易被接受</font>）</p>
+<p>Step2：人群画像</p>
+<p>要思考目标用户是谁？</p>
+<p>Step3:用户场景</p>
+<p>什么场景下，会需要到这个产品</p>
+<p>Step4:产品改进</p>
+<p>Step5:宣传&amp;营销</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 需要具备的基本素质]]></title>
+        <id>https://iraxu.github.io/post/pm0006/</id>
+        <link href="https://iraxu.github.io/post/pm0006/">
+        </link>
+        <updated>2023-12-19T01:29:26.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="一-热情">一、热情</h2>
+<p>做好用户眼里的好产品挺难的，需要做很多事情，热情才能坚持下去。</p>
+<p>其中还会包含好奇心，长期抱有学习的心态。</p>
+<h2 id="二-同理心">二、同理心</h2>
+<p>凡事能站在用户的角度去想、思考，体会痛点。</p>
+<h2 id="三-执行力和自驱力">三、执行力和自驱力</h2>
+<p>能清楚地分解任务找资源人落地。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[碎碎念 - 黑苹果主机规划]]></title>
+        <id>https://iraxu.github.io/post/Chat_Hackintosh/</id>
+        <link href="https://iraxu.github.io/post/Chat_Hackintosh/">
+        </link>
+        <updated>2023-12-18T10:12:53.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="准备组一台amd的黑苹果主机用于办公暂定配置如下">准备组一台AMD的黑苹果主机用于办公，暂定配置如下</h3>
+<h2 id="系统配置">系统配置</h2>
+<table>
+<thead>
+<tr>
+<th>规格</th>
+<th>详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>AMD Ryzen 7 5800H</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>Asgard DDR4 16G 3200MHz *2</td>
+</tr>
+<tr>
+<td>SSD 1</td>
+<td>HITAI TI600 1T</td>
+</tr>
+<tr>
+<td>SSD 2</td>
+<td>----</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>AMD Radeon Graphics 3GB</td>
+</tr>
+<tr>
+<td>Wi-Fi</td>
+<td>Intel  AX200</td>
+</tr>
+</tbody>
+</table>
+<h2 id="应用版本">应用版本</h2>
+<table>
+<thead>
+<tr>
+<th>规格</th>
+<th>详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIOS</td>
+<td>5800H502</td>
+</tr>
+<tr>
+<td>OC</td>
+<td>0.9.4</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>macOS Big Sur</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 产品经理的分类]]></title>
+        <id>https://iraxu.github.io/post/pm0005/</id>
+        <link href="https://iraxu.github.io/post/pm0005/">
+        </link>
+        <updated>2023-12-18T07:30:28.000Z</updated>
+        <content type="html"><![CDATA[<p>产品经理的分类：</p>
+<ol>
+<li>
+<h3 id="按服务对象划分">按服务对象划分</h3>
+</li>
+</ol>
+<ul>
+<li>
+<h5 id="c端面向群众">C端（面向群众）</h5>
+<p>注重用户体验和用户需求的挖掘和满足。</p>
+</li>
+<li>
+<h5 id="b端面向企业">B端（面向企业）</h5>
+<p>业务抽象化。提高标准化程度或提高业务效率、逻辑思维能力和全局观念。</p>
+</li>
+</ul>
+<ol start="2">
+<li>
+<h3 id="按前后端划分">按前后端划分</h3>
+</li>
+</ol>
+<ul>
+<li>
+<h5 id="前端">前端</h5>
+</li>
+<li>
+<h5 id="中台">中台</h5>
+</li>
+<li>
+<h5 id="后端">后端</h5>
+</li>
+</ul>
+<ol start="3">
+<li>
+<h3 id="按工作内容划分">按工作内容划分</h3>
+</li>
+</ol>
+<ul>
+<li>
+<h5 id="用户pm">用户PM</h5>
+<p>也叫用户体验PM，交互PM，是直接面向用户，实现业务。</p>
+</li>
+<li>
+<h5 id="商业pm">商业PM</h5>
+<p>围绕最大化程度实现产品的盈利点，挖掘商业潜能，最大化实现产品价值，为企业实现更大利润。</p>
+</li>
+<li>
+<h5 id="策略pm">策略PM</h5>
+<p>研究和制定公司的业务策略，战略布局，调整产品策略和业务方向。</p>
+</li>
+<li>
+<h5 id="数据pm">数据PM</h5>
+<p>负责从数据维度出发分析业务，搭建业务框架，用数据的手段提升整体业务水平，为其他团队提供数据支撑等。</p>
+</li>
+<li>
+<h5 id="aipm">AIPM</h5>
+<p>负责AI相关项目的规划和设计。</p>
+</li>
+<li>
+<h5 id="平台pm">平台PM</h5>
+<p>主要从整个全局架构角度出发，高度抽象业务现象、提炼业务本质，从功能、平台、机制三维度综合搭建整个平台服务，为公司整体提供服务。</p>
+</li>
+</ul>
+<p>面试中，面试官问这个问题，可以和应聘公司相结合。</p>
+<p>主要分为C端：像阿里的淘宝和天猫（像字节的抖音）；B端：像钉钉（像自己的飞书）；中台：CRM等</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 产品分析报告模板]]></title>
+        <id>https://iraxu.github.io/post/pm0004/</id>
+        <link href="https://iraxu.github.io/post/pm0004/">
+        </link>
+        <updated>2023-12-16T07:27:42.000Z</updated>
+        <content type="html"><![CDATA[<p>一、产品概述</p>
+<h4 id="11-产品名称">1.1 产品名称</h4>
+<h4 id="12-产品版本">1.2 产品版本</h4>
+<h4 id="13-产品定位">1.3 产品定位</h4>
+<h4 id="14-产品介绍">1.4 产品介绍</h4>
+<h4 id="15-产品slogan">1.5 产品slogan</h4>
+<h3 id="二-产品逻辑分析">二、产品逻辑分析</h3>
+<h4 id="21-产品特色创新模式">2.1 产品特色（创新模式）</h4>
+<h4 id="22-产品结构">2.2 产品结构</h4>
+<h4 id="23-产品业务逻辑流程图">2.3 产品业务逻辑流程图</h4>
+<h3 id="三-需求分析和用户画像">三、需求分析和用户画像</h3>
+<h4 id="31-需求分析">3.1 需求分析</h4>
+<h5 id="311-基本型需求">3.1.1 基本型需求</h5>
+<h5 id="312-期望型需求">3.1.2 期望型需求</h5>
+<h5 id="313-兴奋型需求">3.1.3 兴奋型需求</h5>
+<h4 id="32-用户画像">3.2 用户画像</h4>
+<h5 id="321-用户性别和年龄分布">3.2.1 用户性别和年龄分布</h5>
+<h5 id="322-用户区域及占比">3.2.2 用户区域及占比</h5>
+<h5 id="323-典型用户画像">3.2.3 典型用户画像</h5>
+<h3 id="四-市场状况">四、市场状况</h3>
+<h4 id="41-市场份额">4.1 市场份额</h4>
+<h4 id="42-市场数据分析">4.2 市场数据分析</h4>
+<h3 id="五-产品功能分析">五、产品功能分析</h3>
+<p>核心功能、特色功能</p>
+<h3 id="六-竞品分析">六、竞品分析</h3>
+<p>注意：这里不要很详细，用一张表格来总结即可。</p>
+<h3 id="七-总结">七、总结</h3>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - PRD文档(模板)]]></title>
+        <id>https://iraxu.github.io/post/pm0003/</id>
+        <link href="https://iraxu.github.io/post/pm0003/">
+        </link>
+        <updated>2023-12-15T07:24:06.000Z</updated>
+        <content type="html"><![CDATA[<p>一、版本修订记录</p>
+<h3 id="1修订记录">1.修订记录</h3>
+<table>
+<thead>
+<tr>
+<th>版本号</th>
+<th>修订日期</th>
+<th>修订内容</th>
+<th>修改原因</th>
+<th>修订人</th>
+<th>审核人</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1.0</td>
+<td>2021/4/20</td>
+<td>新增【XX】功能</td>
+<td>业务需求</td>
+<td>张三</td>
+<td>李四</td>
+<td>初稿</td>
+</tr>
+<tr>
+<td>V2.0</td>
+<td>2021/4/30</td>
+<td>修改【XX】功能</td>
+<td>产品优化、体验流程优化</td>
+<td>张三</td>
+<td>李四</td>
+<td>修订</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>（这里要把修订内容都列举出来）</td>
+<td>（这里要详细一点）</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2甘特图">2.甘特图</h3>
+<p>条状图来显示项目、进度和其他时间相关的系统进展的内在关系随着时间进展的情况</p>
+<h2 id="二-产品概述">二、产品概述</h2>
+<h3 id="1产品介绍">1.产品介绍</h3>
+<h4 id="1产品背景">1）产品背景</h4>
+<h4 id="2产品机遇">2）产品机遇</h4>
+<p>基于可以包含政策、经济、社会、科技多维度分析机遇。</p>
+<h4 id="3产品价值">3）产品价值</h4>
+<p>简单来说，就是它是什么，采用了什么，解决了什么问题。</p>
+<h3 id="2产品用户">2.产品用户</h3>
+<h4 id="1用户类型">1）用户类型</h4>
+<p>这里可以包含种子用户、核心用户、目标用户、潜在用户来阐述。</p>
+<p>同时可以用表格列举每个用户角色所对应的用户描述。</p>
+<p>如：学生：接受新鲜事物能力强，出行需求和频率高，但消费能力较低；白领，XXX；商务人士：XXX；</p>
+<h4 id="2地域分布">2）地域分布</h4>
+<p>用一张图来表示，每个用户在全国分布。</p>
+<p>用户属性。</p>
+<p><mark>（这个可以通过百度指数来看）</mark></p>
+<h3 id="3用户需求">3.用户需求</h3>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>用户故事</th>
+<th>需求描述</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>评审</td>
+<td>乘客加班到深夜，公司地理位置偏不好打车。</td>
+<td>线上预约车辆，XXXXX。</td>
+<td>P0</td>
+</tr>
+<tr>
+<td></td>
+<td>在雨雪天气，乘客担心出门拦不到出租。</td>
+<td>利用平台约车，XXXXX。</td>
+<td>P1</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4功能清单">4.功能清单</h3>
+<p>是为了满足用户提出的需求所具备的功能列表。（这里所列举到的，后面都会有个详细的说明）</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>模块</th>
+<th>功能（feature）</th>
+<th>功能描述</th>
+<th><strong>优先级</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>注册登录</td>
+<td>注册</td>
+<td>用户可以通过手机号码+验证码或者手机一键注册</td>
+<td>P0</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>登录</td>
+<td>用户可以使用验证码、密码、免验证、授权第三方、一键登录完成登录</td>
+<td>P0</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="5产品架构">5.产品架构</h3>
+<p>产品架构图主要是包括功能结构图和信息框架图</p>
+<p>这里列举滴滴</p>
+<figure data-type="image" tabindex="1"><img src="http://image.woshipm.com/wp-files/2020/03/lcjeBNiyf7B4IpDW3MJc.png" alt="img" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="http://image.woshipm.com/wp-files/2020/03/uor1SPCcoSxLALHwUOIl.png" alt="img" loading="lazy"></figure>
+<h3 id="6专有名词解释">6.专有名词解释</h3>
+<p>为了让阅读PRD的人更容易理解。</p>
+<table>
+<thead>
+<tr>
+<th>专业术语</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拼车</td>
+<td>XXXXX</td>
+</tr>
+<tr>
+<td>顺风车</td>
+<td>XXXXX</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="三-功能说明">三、功能说明</h2>
+<p><mark>这部分就是一个重点，是对功能清单的功能点详细说明，需要包含功能说明，原型图，流程图等。</mark></p>
+<h3 id="1功能详细说明">1.功能详细说明</h3>
+<h4 id="11登录">1.1登录</h4>
+<h5 id="a原型">a)原型</h5>
+<p>把原型图放上来，最好有交互效果。</p>
+<h5 id="b功能说明">b)功能说明</h5>
+<p>每个功能点需要标明出来，并且要详细说明。（若用原型图，则会把原型和功能说明放到一块）</p>
+<h5 id="c流程图">c)流程图</h5>
+<p>整个功能的流程是怎样的。</p>
+<figure data-type="image" tabindex="3"><img src="http://image.woshipm.com/wp-files/2020/03/PFFpUQQESwhiKh0W34Ve.png" alt="" loading="lazy"></figure>
+<h4 id="12注册">1.2注册</h4>
+<h4 id="13">1.3....</h4>
+<h4 id="14">1.4....</h4>
+<h3 id="2全局说明">2.全局说明</h3>
+<h3 id="1权限说明">1.权限说明</h3>
+<p>这里的权限说明，主要想表达的意思是，身份不同的时候，具体有哪些权限是开放的。</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>预约出行</th>
+<th>查看对话</th>
+<th>查看优惠</th>
+<th>查询订单</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>未登录</td>
+<td>X</td>
+<td>X</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr>
+<td>已登录</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr>
+<td>VIP（可能细化青铜、白银、黄金等）</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2授权说明">2.授权说明</h3>
+<p>用原型图来表示授权说明，如是否允许访问手机号、是否访问设备定位信息等。</p>
+<h3 id="3异常说明">3.异常说明</h3>
+<p>用原型图来展示会出现的异常情况。</p>
+<h3 id="4键盘说明">4.键盘说明</h3>
+<p>这里用原型图来展示。例如：点击手机号码输入框和短信验证码输入框时弹出数字键盘，其他则弹出字母键盘。</p>
+<h3 id="5字段规则">5.字段规则</h3>
+<table>
+<thead>
+<tr>
+<th>字段名称</th>
+<th>是否必填</th>
+<th>数据类型</th>
+<th>字段长度</th>
+<th>提示文字</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>手机号</td>
+<td>是</td>
+<td>number</td>
+<td>11</td>
+<td>请输入手机号码</td>
+<td></td>
+</tr>
+<tr>
+<td>密码</td>
+<td>是</td>
+<td>字符串</td>
+<td>6-16</td>
+<td>请输入密码</td>
+<td>需要包含数字和字母，并且第一个要为大写。</td>
+</tr>
+<tr>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="四-非功能性需求">四、非功能性需求</h2>
+<h3 id="1性能需求">1.性能需求</h3>
+<h3 id="2监控需求">2.监控需求</h3>
+<h3 id="3兼容需求">3.兼容需求</h3>
+<h3 id="4技术组件需求">4.技术组件需求</h3>
+<h3 id="5安全性需求">5.安全性需求</h3>
+<p><mark>（这里所提及到的需求可以用一张表来描述）</mark></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 产品经理的工作日常]]></title>
+        <id>https://iraxu.github.io/post/pm0002/</id>
+        <link href="https://iraxu.github.io/post/pm0002/">
+        </link>
+        <updated>2023-12-14T07:21:14.000Z</updated>
+        <content type="html"><![CDATA[<p>参考链接：https://www.zhihu.com/question/356390949/answer/1226155039</p>
+<p>在面试中，面试官问你产品经理的日常工作的目的是为了看你是否有了解和熟悉这个岗位，是否有为此深入了解过，而不是自以为的适合这岗位。</p>
+<h3 id="一-1000-1030晨会工作规划">一、10:00-10:30：晨会/工作规划</h3>
+<ol>
+<li>快速同步/讨论昨天关键数据、工作进展等信息。Product manager</li>
+<li>今天工作执行计划、依赖资源、资源调配状态。</li>
+</ol>
+<h3 id="二-1030-1200工作启动">二、10:30-12:00：工作启动</h3>
+<p>根据晨会/工作规划结果及问题大纲，开始干活。</p>
+<ol>
+<li>明确今天工作list</li>
+</ol>
+<ul>
+<li>所有工作开始之前，都要问自己why，目标是什么。</li>
+<li>确认工作内容，相关方及所依赖的资源。</li>
+<li>优先级划分及时间安排。</li>
+</ul>
+<ol start="2">
+<li>确定关键资源信息</li>
+</ol>
+<ul>
+<li>人：涉及到的每个部门关键负责人，TA什么时候有时间，今日议题是否统一。</li>
+<li>时间：确认项目验收时间节点，以及下一个阶段启动事项准备情况。</li>
+</ul>
+<h3 id="三-午休">三、午休</h3>
+<h3 id="四-1400-1800需求评审重点客户问题处理等大块工作">四、14:00-18:00：需求评审/重点客户问题处理等大块工作</h3>
+<ol>
+<li>需求评审/重点客户问题处理内容，以需求评审为例</li>
+</ol>
+<ul>
+<li>项目经理（PMO）发起需求评审会议；</li>
+<li>项目经理（PMO）对需求进行第一轮审核，避免一句话需求；</li>
+<li>开始需求讨论
+<ul>
+<li>需求真实性：是否有经过调研；</li>
+<li>需求价值：收入？用户数？用户体验？</li>
+<li>需求紧急程度：不做？靠后做？</li>
+<li>需求依赖资源：多少设计/研发人力？多长时间？</li>
+<li>需求排期：什么时候可以上线？</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>需求评审/重点客户问题处理工作方式，在线办公的趋势的演进</li>
+</ol>
+<ul>
+<li>异地协同：线上文档；</li>
+<li>文档管理：</li>
+<li>持续学习</li>
+</ul>
+<h3 id="五-晚饭">五、晚饭</h3>
+<h3 id="六-1900-2100邮件回复方案撰写等工作">六、19:00-21:00：邮件回复/方案撰写等工作</h3>
+<ol>
+<li>重点工作复盘</li>
+<li>邮件回复</li>
+<li>撰写文档：PRD/MRD/原型图等</li>
+</ol>
+<h3 id="总结起来">总结起来：</h3>
+<p>早上：对昨日的总结+明确今日任务（包含对接相关负责人）</p>
+<p>下午：需求的相关会议</p>
+<p>晚上：复盘+文档（PRD/原型图等）撰写</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 如何从0到1实现产品]]></title>
+        <id>https://iraxu.github.io/post/pm0001/</id>
+        <link href="https://iraxu.github.io/post/pm0001/">
+        </link>
+        <updated>2023-12-14T07:13:14.000Z</updated>
+        <content type="html"><![CDATA[<p>在面试中，面试官不会直接这样抛出问题，而是会问你简历上的项目，你是如何实现的?<br>
+（就是看你简历如何写，面试官如何问）</p>
+<p>注意！！无论面试官如何问，都逃不出以下回答框架。即产品实现的全过程。</p>
+<h3 id="一-产品前期的策划">一、产品前期的策划：</h3>
+<p>产品调研、产品策划、产品高保真原型图（包含交互式原型图和对应的功能说明）、PRD、技术文档、接口文档等设计。</p>
+<h3 id="二-产品中期的实现">二、产品中期的实现：</h3>
+<p>项目管理、代码实现、产品交互、UI设计、团队如何协作共同以及如何推进项目。</p>
+<h3 id="三-产品后期的运营">三、产品后期的运营：</h3>
+<p>产品运营、数据运营、用户运用、内容运营以及产品商业化。</p>
+<p>在产品前期的策划中，每一个模块都是PM需要掌握的技能。可以体现出你的产品sense，当然在策划中也要考虑到产品商业化的东西，体现商业sense。</p>
+<p>注意！！在面试之前，产品策划中的每一个模块都是需要提前总结准备的。简历上的项目（包括实习）也要按着这流程总结。</p>
+]]></content>
+    </entry>
+</feed>

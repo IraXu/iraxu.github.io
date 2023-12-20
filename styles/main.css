@@ -1,0 +1,186 @@
+body {
+  color: #333;
+  background-color: #faf9f7;
+}
+@font-face {
+  font-family: '霞骛文楷';
+  src: url('https://js.cdn.haah.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/light.woff2') format('woff2'), url('https://js.cdn.haah.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/light.woff') format('woff');
+  font-weight: lighter;
+  font-style: normal;
+}
+@font-face {
+  font-family: '霞骛文楷';
+  src: url('https://js.cdn.haah.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/regular.woff2') format('woff2'), url('https://js.cdn.haah.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: '霞骛文楷';
+  src: url('https://js.cdn.haah.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/bold.woff2') format('woff2'), url('https://js.cdn.haah.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff2/Light.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff/Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff2/Regular.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff/Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff2/Medium.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff/Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff2/SemiBold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff/SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff2/Bold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/FiraCode/woff/Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+a:not([class]) {
+  border-bottom-style: solid;
+  border-bottom-width: 0.2rem;
+  color: #0f61ff;
+  text-decoration: none;
+  transition: all 0.3s ease 0s;
+  border-color: rgba(15, 97, 255, 0.1);
+}
+a:not([class]):hover {
+  border-color: rgba(15, 97, 255, 0.5);
+}
+@media (prefers-color-scheme: dark) {
+  a:not([class]) {
+    color: #81a5f8;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #333;
+    color: #999;
+  }
+}
+.yellow-btn {
+  box-shadow: rgba(255, 214, 2, 0.6) 0px 6px 12px 0px;
+}
+.yellow-btn:hover {
+  box-shadow: rgba(255, 214, 2, 0.6) 0px 2px 4px 0px;
+}
+@media (prefers-color-scheme: dark) {
+  .yellow-btn {
+    box-shadow: none;
+  }
+}
+.wechat img {
+  display: none;
+}
+.wechat:hover img {
+  display: inline-block;
+}
+.s3-round {
+  border-radius: 100px;
+}
+.s3-hover:hover {
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  animation: s3-rotate 5s infinite linear, s3-opacity 5s infinite;
+}
+.s3-transition {
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+}
+@keyframes s3-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+@keyframes s3-opacity {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+.s3-dotted {
+  border-radius: 100px;
+}
+.s3-dotted:hover {
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  animation: s3-rotate 5s infinite linear, s3-opacity 5s infinite;
+}
+.s3-dashed {
+  border-radius: 100px;
+}
+.s3-dashed:hover {
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  animation: s3-rotate 5s infinite linear, s3-opacity 5s infinite;
+}
+#cursor {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  background: #39c5bb;
+  border-radius: 8px;
+  opacity: 0.25;
+  z-index: 10086;
+  pointer-events: none;
+  transition: 0.2s ease-in-out;
+  transition-property: background, opacity, transform;
+}
+#cursor.hidden {
+  opacity: 0;
+}
+#cursor.hover {
+  opacity: 0.1;
+  transform: scale(2.5);
+}
+#cursor.active {
+  opacity: 0.5;
+  transform: scale(0.5);
+}
+
+      body {
+        font-family: "霞骛文楷";
+      }
+
+      @supports (font-variation-settings: normal) {
+        body {
+          font-family: "霞骛文楷";
+        }
+      }
+    
