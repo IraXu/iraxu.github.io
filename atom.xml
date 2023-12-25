@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://iraxu.github.io</id>
+    <title>X&apos; Blog</title>
+    <updated>2023-12-25T02:51:55.095Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://iraxu.github.io"/>
+    <link rel="self" href="https://iraxu.github.io/atom.xml"/>
+    <subtitle>金风玉露一相逢，便胜却人间无数</subtitle>
+    <logo>https://iraxu.github.io/images/avatar.png</logo>
+    <icon>https://iraxu.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2023, X&apos; Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[圣诞快乐！用Python画一个圣诞树吧！]]></title>
+        <id>https://iraxu.github.io/post/2023MerryChristmas/</id>
+        <link href="https://iraxu.github.io/post/2023MerryChristmas/">
+        </link>
+        <updated>2023-12-25T02:44:42.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="导入numpy库这个库在进行数值操作时非常有用">导入NumPy库，这个库在进行数值操作时非常有用</h3>
+<pre><code class="language-python">import numpy as np
+</code></pre>
+<h3 id="创建一个从7到15的数字数组-这个数组将用于树前的空格">创建一个从7到15的数字数组。这个数组将用于树前的空格</h3>
+<pre><code class="language-python">x= np.arange(7，16)
+</code></pre>
+<h3 id="创建一个从1到17的奇数数组-这些数字代表树的每一行的星号数量">创建一个从1到17的奇数数组。这些数字代表树的每一行的星号数量</h3>
+<pre><code class="language-python">y= np.arange(1，18，2)
+</code></pre>
+<h3 id="将数组x和y组合成一个二维数组其中x是反向的-这将把每行前面的空格数和星号数配对起来">将数组x和y组合成一个二维数组，其中x是反向的。这将把每行前面的空格数和星号数配对起来。</h3>
+<pre><code class="language-python">z= np.column stack((x[::-1]，y))
+</code></pre>
+<h3 id="循环遍历二维数组中的每一对值ii-i是空格数j是星号数">循环遍历二维数组中的每一对值(i，i):  i是空格数，j是星号数。</h3>
+<pre><code class="language-python">for i,j in z:
+print(’，*i+*'*j) # 打印i个空格后跟i个星号。
+</code></pre>
+<h3 id="上面的循环打印出了圣诞树的主体-现在打印树桩-这样做3次使树桩更粗">上面的循环打印出了圣诞树的主体。现在，打印树桩。这样做3次，使树桩更粗。</h3>
+<pre><code class="language-python">for r in range(3):print(''*13， ) # 打印13个空格，然后是树桩符号
+</code></pre>
+<h3 id="最后打印树桩的底座带有装饰元素-它将打印底座装饰然后下一个打印将在同一行">最后，打印树桩的底座，带有装饰元素。它将打印底座装饰，然后下一个打印将在同一行。</h3>
+<pre><code class="language-python">print(''*12,end =  =====/')
+print()
+</code></pre>
+<h2 id="merry-christmas~">🎄 Merry Christmas~</h2>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 如何进行A/B测试：完美拆分测试的5个步骤]]></title>
+        <id>https://iraxu.github.io/post/pm-abtest/</id>
+        <link href="https://iraxu.github.io/post/pm-abtest/">
+        </link>
+        <updated>2023-12-21T08:16:33.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="引言">引言</h2>
+<p>上周末回家途中看《俞军的产品方法论》一书时，接触到一个词叫 <strong>A/B测试</strong>。<br>
+初见这个词，我以测试的思维第一时间想到的是α和β测试，也就是测试的 alpha测试 和 beta测试 阶段。后来随着文章的深入，发现好像并不是那么一回事。<br>
+遂以我自己的方式梳理了这篇杂记，好好聊聊A/B测试。</p>
+<h2 id="什么是ab测试">什么是A/B测试</h2>
+<p>A/B 测试，也称为拆分对比测试，是一种营销实验，其中两个或多个版本的变量（网页、页面元素等）同时显示给不同的项目访问者群体，以确定哪个版本留下最大的影响并推动业务指标。换句话说，您可以向一半的受众显示一段营销内容的版本 A，向另一半受众显示版本 B。</p>
+<p>举几个例子：</p>
+<ol>
+<li>B站首页改版的时候，部分用户显示的新版、部分用户显示的旧版；</li>
+<li>WeiBo首页改版的时候，部分用户显示的新版、部分用户显示的旧版；</li>
+<li>Twitter首页改版的时候，部分用户显示的新版、部分用户显示的旧版；</li>
+</ol>
+<p>当然，上述所说的三个例子如今已经度过了A/B测试阶段，全部用户都显示新版界面了。</p>
+<p>从本质上讲，A/B测试消除了项目优化中的所有猜测，并使体验优化者能够做出数据支持的决策。<br>
+<u>在 A/B 测试中，A 是指“控制”或原始测试变量。而 B 指的是“变异”或原始测试变量的新版本</u>。</p>
+<p>将您的业务指标推向积极方向的版本被称为“赢家”。在测试的页面/元素上实施此获胜变体的更改可以帮助优化您的网站并提高业务投资回报率。</p>
+<p>每个网站的转化指标都是唯一的。例如，在电子商务的情况下，可能是产品的销售。同时，对于B2B来说，可能是合格潜在客户的产生。</p>
+<p>A/B测试是转化率优化（CRO）总体过程的组成部分之一，您可以使用它<u>收集定性和定量的用户见解</u>。您可以进一步使用这些收集的数据来了解用户行为、参与率、痛点，甚至对网站功能的满意度，包括新功能、改进的页面部分等。</p>
+<h2 id="ab测试如何工作">A/B测试如何工作</h2>
+<p>要运行 A/B 测试，您需要为一个内容创建两个不同版本，并对单个变量进行更改。</p>
+<p>然后，您将向两个规模相似的受众群体展示这两个版本，并分析哪个版本在特定时间段内效果更好（足够长的时间以便对您的结果做出准确的结论）。<br>
+<img src="https://iraxu.github.io/post-images/1703148277139.jpg" alt="" loading="lazy"><br>
+<u>A/B测试可帮助营销人员/产品观察某块内容的一个版本与另一个版本一起执行的效果。</u></p>
+<h2 id="ab-测试的不同类型">A/B 测试的不同类型</h2>
+<p>在了解要测试哪些页面元素以将您的业务指标推向积极的方向之后，让我们继续了解不同类型的测试方法及其优势。<br>
+理想情况下，有四种基本测试方法：</p>
+<ol>
+<li>A/B 测试</li>
+<li>拆分 URL 测试</li>
+<li>多变量测试</li>
+<li>多页测试</li>
+</ol>
+<h3 id="1-拆分url测试">1、拆分URL测试</h3>
+<p>测试领域的许多人将拆分URL测试与A / B测试混淆。然而，这两者有着根本的不同。<br>
+拆分 URL 测试是指一个实验过程，其中测试现有网页 URL 的全新版本以分析哪个版本性能更好。<br>
+<img src="https://iraxu.github.io/post-images/1703148265232.jpg" alt="" loading="lazy"><br>
+通常，当您只想测试网站上的前端更改时，会使用 A/B 测试。另一方面，当您希望对现有页面进行重大更改时，尤其是在设计方面，会使用拆分 URL 测试。</p>
+<p>当您运行拆分网址测试时，您的网站流量会分为对照（原始网页网址）和变体（新网页网址），并衡量它们各自的转化率以决定胜出者。</p>
+<h4 id="拆分网址测试的优势">拆分网址测试的优势：</h4>
+<p>◉ 非常适合尝试激进的新设计，同时使用现有页面设计进行比较分析；<br>
+◉ 建议用于运行具有非 UI 更改的测试，例如切换到其他数据库、优化页面的加载时间等；<br>
+◉ 更改网页工作流。工作流极大地影响业务转换，有助于在实施更改之前测试新路径，并确定是否遗漏了任何症结；<br>
+◉ 一种更好且备受推荐的动态内容测试方法。</p>
+<h3 id="2-多变量测试">2、多变量测试</h3>
+<p>多变量测试 （MVT） 是指一种实验方法，其中同时测试多个页面变量的变化，以分析在所有可能的排列中哪个变量组合表现最佳。它比常规的A / B测试更复杂，最适合高级营销，产品和开发专业人员。</p>
+<p>-- 这块内容还待梳理。。。。后续更新。。。--</p>
+<h3 id="3-多页测试">3、多页测试</h3>
+<p>多页测试是一种实验形式，您可以在其中跨多个页面测试对特定元素的更改。<br>
+<img src="https://iraxu.github.io/post-images/1703148501143.jpg" alt="" loading="lazy"><br>
+有两种方法可以进行多页测试：</p>
+<p>首先，您可以获取销售漏斗的所有页面并为每个页面创建新版本，这使您的挑战者成为销售漏斗，然后针对控件对其进行测试。这称为漏斗多页测试。</p>
+<p>第二，您可以测试添加或删除重复出现的元素（例如安全徽章、推荐信等）如何影响整个渠道的转化。这称为经典或传统多页测试。</p>
+<h4 id="多页测试的优势">多页测试的优势：</h4>
+<p>与 A/B 测试类似，多页测试易于创建和运行，并在尽可能短的时间内轻松提供有意义且可靠的数据。</p>
+<p>多页测试的优点如下：<br>
+◉ 它使您能够为目标受众创建一致的体验；<br>
+◉ 它可以帮助您的目标受众看到一组一致的页面，无论是控件还是其变体之一；<br>
+◉ 它使您能够在多个页面上实施相同的更改，以确保您的网站访问者在浏览您的网站时不会分心并在不同的变体和设计之间跳动。</p>
+<h2 id="如何进行ab测试">如何进行A/B测试</h2>
+<p>从广义上讲，它包括以下步骤：</p>
+<ol>
+<li>研究</li>
+<li>观察并指定假设</li>
+<li>创建变体</li>
+<li>运行测试</li>
+<li>分析结果并部署更改<br>
+<img src="https://iraxu.github.io/post-images/1703149005205.jpg" alt="" loading="lazy"></li>
+</ol>
+<h2 id="后言">后言</h2>
+<p>A/B测试可以减少进行优化计划时涉及的许多风险。<br>
+它还将通过消除所有薄弱环节并找到项目的最优化版本来帮助您显着改善项目的用户体验。</p>
+<blockquote>
+<p>文章参考：<br>
+<a href="https://blog.hubspot.com/marketing/how-to-do-a-b-testing#the-benefits-of-ab-testing" target="_blank">https://blog.hubspot.com/marketing/how-to-do-a-b-testing#the-benefits-of-ab-testing</a><br>
+<a href="https://vwo.com/ab-testing/#a-b-testing-examples" target="_blank">https://vwo.com/ab-testing/#a-b-testing-examples</a></p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 竞品分析]]></title>
+        <id>https://iraxu.github.io/post/pm0008/</id>
+        <link href="https://iraxu.github.io/post/pm0008/">
+        </link>
+        <updated>2023-12-21T01:36:59.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="一-前言">一、前言</h2>
+<h3 id="1产品介绍">1.产品介绍</h3>
+<h4 id="产品a简单介绍">产品A简单介绍</h4>
+<h4 id="产品b简单介绍">产品B简单介绍</h4>
+<h3 id="2市场背景">2.市场背景</h3>
+<h4 id="同类app市场份额占比排行">同类APP市场份额占比排行</h4>
+<h3 id="3分析目的">3.分析目的</h3>
+<p>此次竞品分析的目的是什么</p>
+<h3 id="4分析矩阵">4.分析矩阵</h3>
+<p>包含竞品名称、产品定位、上线时间、搜索指数（百度指数）、核心功能、融资轮数等</p>
+<h2 id="二-基本信息">二、基本信息</h2>
+<p>两个产品的基本信息。</p>
+<p>包含此次分析的时间、产品logo、关键词等；</p>
+<h2 id="三-迭代方向">三、迭代方向</h2>
+<p>迭代方向矩阵图，通过迭代方向，总结出两个产品的方向与定位</p>
+<h2 id="四-用户群体">四、用户群体</h2>
+<p>可以引进这两个产品的用户画像，得出用户群体数据；（这个数据可以来自各行业的研究报告，如艾瑞指数）</p>
+<p>通过用户群体，得出用户的主要特点，深入到这个群体的人性价值上。</p>
+<h2 id="五-分析内容">五、分析内容</h2>
+<h3 id="1战略层">1.战略层</h3>
+<p>决定了产品的基本定向，以企业目标为前提，根据产品目标和需求来制定。</p>
+<h3 id="2范围层核心功能-特色功能-基本功能">2.范围层（核心功能、特色功能、基本功能）</h3>
+<p>对已确认的需求进一步具体拆分拆分和排定优先级，考虑给用户什么<mark>功能和内容</mark>。</p>
+<h3 id="3结构层信息流程-页面层级-界面布局">3.结构层（信息流程、页面层级、界面布局）</h3>
+<p>将范围层中分散的需求/功能片段组合成一个整体。</p>
+<p>会包含信息架构，关注的是呈现给用户的信息是否合理并且有意义（用户最关心的呈现出来）</p>
+<h3 id="4框架层交互样式">4.框架层（交互样式）</h3>
+<p>相当于骨架搭建完毕后，需要填充上血肉。--&gt; 界面外观、导航设计、信息设计等</p>
+<h3 id="5表现层布局-颜色-样式-文案">5.表现层（布局、颜色、样式、文案）</h3>
+<p>交互元素的布局，包含听觉设计、视觉设计。简单来说，就是让产品会“说话”，产品内部视觉设计一致性。</p>
+<h3 id="6商业模式">6.商业模式</h3>
+<p>流量变现是一个产品很看重的，需要进行罗列比较</p>
+<h2 id="六-总结">六、总结</h2>
+<p>竞品分析完毕后，一定要对其进行总结，阐述各自的优缺点。同时，需要给出建议，这里的建议是指自己如果作为这个产品的PM，会往哪个方向进行优化。</p>
+<h3 id="1总结">1.总结</h3>
+<p>这里的总结包含了优势、劣势、主打方向、机会、威胁等。</p>
+<h3 id="2建议">2.建议</h3>
+<p>一定要有自己的想法，针对劣势来给出优化方案和建议。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Android开发 - 实现Material 3 主题]]></title>
+        <id>https://iraxu.github.io/post/androidDev001/</id>
+        <link href="https://iraxu.github.io/post/androidDev001/">
+        </link>
+        <updated>2023-12-20T07:57:32.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>官方文档：<a href="https://m3.material.io" target="_blank">https://m3.material.io</a></p>
+<blockquote>
+<p>具体每个组件的代码示例，在 github 上：</p>
+<blockquote>
+<p><a href="https://github.com/material-components/material-components-android/tree/master/docs/components" target="_blank">https://github.com/material-components/material-components-android/tree/master/docs/components</a></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="material-介绍">Material 介绍</h2>
+<ol>
+<li>
+<p>什么是Material You<br>
+<font color="/#bff">Material You</font> 也称Material 3或M 3，是第三代Material Design设计语言。<br>
+Material You将颜色重新定义为更加个性化的体验，助力于构建出色且富有表现力的应用。</p>
+</li>
+<li>
+<p>什么是动态颜色<br>
+动态颜色（<font color="/#bff">Dynamic Color</font>）是Material You的关键部分，通过动态配色提取算法从用户的壁纸中派生出颜色方案，且符合无障碍使用的标准，亦或是自定义的个性化颜色方案，然后应用于系统UI和应用程序，从而让设备变得更加个性化。</p>
+</li>
+<li>
+<p>动态颜色的原理是什么<br>
+首先，从用户的壁纸上提取一种源颜色，并推算出5中关键颜色，比如primary、Secondary、Tertiary等。<br>
+然后，将每个关键颜色转化为由13种色调组成的调色板，且每种色调会生成对应的浅、深色方案。<br>
+最后，通过系统Token将从壁纸提取的颜色方案和App Theme关联起来，在DynamicColorsActivityLifecycleCallbacks中判断是否需要覆盖。</p>
+</li>
+</ol>
+<h2 id="引用方法">引用方法</h2>
+<p><a href="https://m3.material.io/libraries/mdc-android/getting-started">https://m3.material.io/libraries/mdc-android/getting-started</a><br>
+md3和 md2 引入方式是一样，但是需要：</p>
+<p>material库版本到<font color="/#bff">1.9.0</font>及以上<br>
+compileSdkVersion，targetSdkVersion设置为 <font color="/#bff">31</font>以上<br>
+使用最新的 Android Studio<br>
+具体操作如下：</p>
+<h3 id="更新gradle依赖">更新Gradle依赖</h3>
+<p>需要在<font color="/#bff">build.gradle</font>中更新Gradle依赖，在dependencies里面写入：</p>
+<pre><code class="language-kotlin">dependencies {
+    // ...
+    implementation 'com.google.android.material:material:1.9.0'
+}
+</code></pre>
+<h3 id="修改版本sdk版本">修改版本Sdk版本</h3>
+<p>在<font color="/#bff">build.gradle</font>中修改<font color="/#bff">compileSdkVersion</font>和<font color="/#bff">targetSdkVersion</font>到31及以上<br>
+build.gradle及修改 的位置<br>
+<img src="https://iraxu.github.io/post-images/1703063292393.png" alt="" loading="lazy"><br>
+将<font color="/#bff">compileSdk</font>和<font color="/#bff">targetSdk</font>改到31以及以上（如上图所示）</p>
+<h3 id="修改app主题">修改APP主题</h3>
+<p>将themes.xml的<font color="/#bff">Theme.AppCompat.<em></font>或<font color="/#bff">Theme.MaterialComponents.</em> </font>改为 <font color="/#bff">Theme.Material3.*</font></p>
+<p>推荐改为：</p>
+<ol>
+<li><font color="/#bff">Theme.Material3.DayNight</font> 有标题栏</li>
+<li><font color="/#bff">Theme.Material3.DayNight.NoActionBar</font> 没有标题栏</li>
+</ol>
+<p>themes.xml及修改 的位置<br>
+<img src="https://iraxu.github.io/post-images/1703063397600.png" alt="" loading="lazy"></p>
+<pre><code class="language-xml">    &lt;style name=&quot;XXXXXXX&quot; parent=&quot;Theme.Material3.DayNight.NoActionBar&quot;&gt;
+&lt;!--     上面name=&quot;XXXXXXX&quot; 的  XXXXXXX改成自己的原来的   --&gt;
+&lt;!--        中间不需要写内容   --&gt;
+    &lt;/style&gt;
+</code></pre>
+<p>设置为<font color="/#bff">Theme.Material3.*</font> 后部分组件便会自动变成 Material3 样式：</p>
+<pre><code class="language-xml">&lt;Button → MaterialButton
+&lt;CheckBox → MaterialCheckBox
+&lt;RadioButton → MaterialRadioButton
+&lt;TextView → MaterialTextView
+&lt;AutoCompleteTextView → MaterialAutoCompleteTextView
+</code></pre>
+<h3 id="使用动态取色">使用动态取色</h3>
+<p>我们过去在使用颜色时可能是硬编码，比如这样：</p>
+<pre><code class="language-xml">android:background=&quot;@color/colorPrimary&quot;
+</code></pre>
+<p>启用md3后，应改为动态访问的方式，比如：</p>
+<pre><code class="language-xml">android:background=&quot;?attr/colorPrimary&quot;
+</code></pre>
+<p>至此已经可以在Android 12+ 上试试动态颜色的效果了</p>
+<h2 id="动态取色选取">动态取色选取</h2>
+<p>颜色的选取建议参考 <a href="https://m3.material.io/styles/color/roles/color-roles">官方文档</a>，下面进行简述：</p>
+<p>颜色分为：</p>
+<ul>
+<li>Primary 主色 ； Secondary 次级色 ； Tertiary 第三位的</li>
+<li>Error</li>
+<li>Outline</li>
+<li>Background</li>
+<li>Surface<br>
+而且日间模式和夜间模式，对应的颜色会自动调整。 当然，这些颜色也可以根据自己的需要进行调整。</li>
+</ul>
+<p>对于颜色的选取参考：</p>
+<ul>
+<li>Primary: 例如，主按钮的背景色</li>
+<li>On Primary: 例如，主按钮上的文字颜色</li>
+<li>Primary Container: 这个我理解不了，比主按钮稍弱一点的按钮？那 Secondary 还有必要么？- applied to elements needing less emphasis than primary</li>
+<li>On Primary Container</li>
+<li>Inverse Primary: 就是跟背景色对比强烈的颜色。For example, snackbars use the reverse color mapping to bring attention to an alert.</li>
+</ul>
+<blockquote>
+<p>版权声明：本文为博主「AloofXu」的原创文章，遵循CC 4.0 BY-SA版权协议。</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[软件测试 - PC客户端的挂测脚本]]></title>
+        <id>https://iraxu.github.io/post/Test001/</id>
+        <link href="https://iraxu.github.io/post/Test001/">
+        </link>
+        <updated>2023-12-20T01:34:56.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="主要用于目前2023年就职公司的pc客户端程序的稳定性挂测任务">主要用于目前（2023年）就职公司的PC客户端程序的稳定性挂测任务</h2>
+<p>同样适用于其他PC客户端程序<br>
+<strong>要求</strong>：</p>
+<ol>
+<li>自动打开指定程序</li>
+<li>检测程序运行状态，若检测到不在运行（闪退等场景），则重启程序</li>
+<li>打印每一次启动程序的时间、程序异常退出的时间、稳定运行的时长</li>
+<li>稳定运行Xmin后，打印当前程序的系统资源占用率</li>
+</ol>
+<h3 id="方法一获取当前鼠标的x轴-y轴坐标">方法一：获取当前鼠标的X轴、Y轴坐标</h3>
+<pre><code class="language-python">import pyautogui
+import time
+
+# 用于获取鼠标当前位置
+def get_mouse_position():
+    while True:
+        position = pyautogui.position()  # 获取鼠标当前位置
+        print(f'当前鼠标位置: X轴: {position.x}, Y轴: {position.y}')
+        time.sleep(1.5)  # 等待1.5秒后再次获取位置
+
+get_mouse_position()
+</code></pre>
+<h3 id="方法二挂测执行脚本">方法二：挂测执行脚本</h3>
+<pre><code class="language-python">import subprocess
+import time
+from datetime import datetime
+import os
+import psutil
+import pyautogui
+
+'''
+    --脚本用于挂测PC客户端稳定性并检测系统性能占用--
+    脚本运行的前提条件：
+    1、程序已登录并记录账号
+    2、程序分屏根据挂测要求切换合适的分屏
+'''
+
+
+def get_system_performance():
+    cpu_percent = psutil.cpu_percent()
+    memory_info = psutil.virtual_memory().percent
+    disk_info = psutil.disk_usage('/').percent
+
+    performance_data = {
+        f&quot;CPU占用率{cpu_percent}%&quot;,
+        f&quot;内占用率{memory_info}%&quot;,
+        f&quot;磁盘占用率{disk_info}%&quot;,
+    }
+
+    return performance_data
+
+
+'''
+    下方代码定义了一个名为 start_program 的函数，该函数用于启动一个指定的程序
+    函数的参数是一个字符串 program_path，表示要启动的程序的路径
+    函数的主要逻辑是使用 subprocess.Popen 函数来启动指定的程序
+    subprocess.Popen 函数可以创建一个新的进程，并执行指定的命令或程序
+    在这里，program_path 表示要启动的程序的路径，shell=True 表示在 shell 环境下执行命令
+    如果在启动程序过程中发生异常，函数会捕获异常并打印错误信息，如果程序无法启动，则会打印相应的错误信息
+'''
+def start_program(program_path):
+    try:
+        subprocess.Popen(program_path, shell=True)
+    except Exception as e:
+        print(f&quot;Error starting program: {e}&quot;)
+
+
+'''
+    下方代码定义了一个名为 is_program_running 的函数，该函数检查指定的程序是否正在运行
+    函数的参数是一个字符串 program_name，表示要检查的程序的名称
+    函数的主要逻辑是使用 subprocess.run 函数来执行 Windows 命令行命令 tasklist，并传递一个过滤条件 /FI IMAGENAME eq {program_name}，这个条件会筛选出与指定程序名称匹配的进程
+    subprocess.run 函数的 capture_output=True 参数用于捕获命令的输出结果，text=True 参数用于将输出结果解析为文本格式
+    函数返回一个布尔值，如果输出结果中包含指定程序名称（不区分大小写），则返回 True，表示程序正在运行；否则返回 False，表示程序未运行
+    如果在执行命令过程中发生异常，函数会打印错误信息并返回 False
+'''
+def is_program_running(program_name):
+    try:
+        result = subprocess.run(['tasklist', '/FI', f'IMAGENAME eq {program_name}'], capture_output=True, text=True)
+        return program_name.lower() in result.stdout.lower()
+    except Exception as e:
+        print(f&quot;Error checking if program is running: {e}&quot;)
+        return False
+
+
+def write_to_file(file_path, content):
+    with open(file_path, 'a') as file:
+        file.write(content + '\n')
+
+
+def click_coordinates(coordinates):  # 用于双击设备列表进行点播
+    for coord in coordinates:
+        pyautogui.doubleClick(coord[0], coord[1])
+        time.sleep(1)  # 指定的屏幕坐标进行双击操作，且每次点击间隔1s
+
+
+def click(bitstream):  # 用于单击码流切换按钮
+    for coord in bitstream:
+        pyautogui.click(coord[0], coord[1])
+        time.sleep(1)  # 指定的屏幕坐标进行单击操作，且每次点击间隔1s
+
+
+def main():
+    # 设置程序所在路径
+    program_path = r'D:\Program Files (x86)\牵心Pro\qianxinpro.exe'
+
+    # 获取桌面路径
+    desktop_path = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+
+    # 创建日志文件路径
+    log_file_path = os.path.join(desktop_path, 'program_log.txt')
+
+    last_start_time = None  # 上次启动时间
+
+    while True:
+        # 记录程序启动时间
+        start_time = datetime.now()
+        start_time_str = start_time.strftime('%Y-%m-%d %H:%M:%S')
+
+        if last_start_time is not None:
+            # 计算上次启动到重启的正常运行时长
+            run_duration = start_time - last_start_time
+            run_duration_str = str(run_duration)
+            print(f&quot;程序正常运行时长：{run_duration_str}&quot;)
+            print(f&quot;-----------------------------------&quot;)
+            write_to_file(log_file_path, f&quot;程序正常运行时长：{run_duration_str}\n&quot;)
+
+        print(f&quot;程序启动时间：{start_time_str}&quot;)
+        write_to_file(log_file_path, f&quot;程序启动时间：{start_time_str}&quot;)
+
+        # 启动程序
+        start_program(program_path)
+        time.sleep(2)
+
+        # 模拟点击坐标点 -- 点播设备
+        coordinates = [(150, 376), (150, 458), (150, 508), (150, 550), (150, 597), (150, 735), (150, 971), (150, 1011), (150, 1059)]
+        click_coordinates(coordinates)
+        print('设备点播完成')
+        time.sleep(1)
+
+        # 模拟点击坐标点 -- 切换至[超清]
+        bitstream = [(773, 469), (773, 889), (773, 1300), (1522, 469), (1522, 889), (1522, 1300), (2269, 469), (2269, 889), (2269, 1300)]
+        click(bitstream)
+        print('码流切换完成')
+
+        # 保存当前启动时间
+        last_start_time = start_time
+
+        '''
+            使用循环+计数器：
+            每隔5秒检测一次程序是否在运行，如果检测程序在运行则计数器+1，当计数器到360（即1800s = 30min）时，打印当前系统的资源占用情况
+            每次打印完，计数器归零，重新开始计数循环；
+            如果检测到程序不在运行，则跳出循环，执行最下方的【记录异常退出时间】并重新执行main方法
+        '''
+        count = 0
+        program_running = True
+        while program_running:
+            if is_program_running(&quot;qianxinpro.exe&quot;):
+                count += 1
+                time.sleep(5)  # 每隔5秒检测程序是否在运行，理论上时间间隔越小误差越小
+                if count == 360:
+                    performance_data_str = get_system_performance()
+                    print(f&quot;{performance_data_str}&quot;)
+                    write_to_file(log_file_path, f&quot;已稳定运行30min，当前系统资源占用→：{performance_data_str}&quot;)
+                    count = 0
+            else:
+                break
+
+        # 记录异常退出时间
+        exit_time = datetime.now()
+        exit_time_str = exit_time.strftime('%Y-%m-%d %H:%M:%S')
+        print(f&quot;检测到Crash→重启ing→时间：{exit_time_str}&quot;)
+        write_to_file(log_file_path, f&quot;检测到Crash→重启ing→时间：{exit_time_str}&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h2 id="补充将自动化脚本打包成exe可执行程序">补充：将自动化脚本打包成.exe可执行程序</h2>
+<p><strong>使用pyinstaller打包</strong><br>
+通常适用于简单的项目，不需要复杂的配置或自定义设置，也无需频繁重复打包的情况；假设我们的python代码如下，文件名为demo.py。</p>
+<pre><code class="language-python">#demo.py
+import os
+path=os.getcwd()
+print(f'当前文件路径：{path}')
+os.system('pause')
+</code></pre>
+<h3 id="打包步骤">打包步骤：</h3>
+<ol>
+<li>在cmd终端中进入demo.py文件的所在目录。</li>
+<li>终端执行：pyinstaller -F demo.py</li>
+</ol>
+<h3 id="指令解释">指令解释：</h3>
+<pre><code class="language-python">pyinstaller
+[-F/-D]       # [产生当个可执行文件/产生一个目录（包含多个文件）作为可执行文件]
+[-w/-c]       # [去掉命令行弹窗/显示命令行弹窗]
+-i icon.ico   # 指定exe显示图标
+demo.py     #打包的python文件
+</code></pre>
+<blockquote>
+<p>版权声明：本文为博主「AloofXu」的原创文章，遵循CC 4.0 BY-SA版权协议。</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 产品思维]]></title>
+        <id>https://iraxu.github.io/post/pm0007/</id>
+        <link href="https://iraxu.github.io/post/pm0007/">
+        </link>
+        <updated>2023-12-20T01:31:12.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>都说在面试中要用产品思维来回答面试官的问题，或者在平时思考问题也要用产品思维来思考。那么，这篇博客就来讲讲产品思维到底是什么吧。<br>
+参考链接：https://zhuanlan.zhihu.com/p/183833093</p>
+</blockquote>
+<h2 id="一-什么是产品思维">一、什么是产品思维</h2>
+<p>把产品思维拆开两个词语来理解：</p>
+<ul>
+<li>产品：产品是满足用户需求、解决用户问题的载体，是一系列功能的集合。</li>
+<li>思维：思维是思考问题的方式，不同的人因为经历和经验不同，思考问题的方式也不同。</li>
+</ul>
+<p>那么综合起来可以理解为：产品思维是一种<mark>解决问题</mark>的综合思维，是进一步把问题<mark>解决方案产品化</mark>的过程。</p>
+<h2 id="二-解决问题">二、解决问题</h2>
+<p>解决问题可以分成三个步骤：<font color="/#bff">发现问题、分析问题、解决问题</font>。</p>
+<p>解决方案产品化就相当于<font color="/#bff">标准化</font>的过程。</p>
+<h3 id="1发现问题问题是什么">1.发现问题：问题是什么？</h3>
+<p>一般会<font color="/#bff">“用户思维”和“数据思维”</font>来发现问题的本质。</p>
+<ul>
+<li>用户思维：最重要的一种思维方式，因为一切产品的起点都是用户获益。需要把我去掉，完完全全站在用户的角度去思考，甚至要站在完全小白的角度去思考。</li>
+<li>数据思维：通过数据分析发现问题。</li>
+</ul>
+<h3 id="2分析问题为什么会产生这个问题">2.分析问题：为什么会产生这个问题？</h3>
+<p>一般会用<font color="/#bff">“本质思维”</font>。</p>
+<ul>
+<li>本质思维：是一种寻根究底、找出问题根本原因的思维。
+<ul>
+<li>可以采用“4W、1H”的方式；</li>
+<li>根源分析法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3解决问题如何解决这个问题">3.解决问题：如何解决这个问题？</h3>
+<p>一般会用“效率思维”</p>
+<ul>
+<li>效率思维：商业的发展发向，一定是向着更高效率的方向发展的。</li>
+</ul>
+<h2 id="三-解决方案产品化">三、解决方案产品化</h2>
+<p>简单来说就是标准化的一个过程。</p>
+<ul>
+<li>标准化：通过<font color="/#bff">归纳提炼，总结共性</font>，最终落地为产品、产品功能、服务或者SOP（Standard Operating Procedure标准作业程序）的方式，进行自动化、规模化解决同一类问题。</li>
+</ul>
+<p>总结起来就是：通过用户思维、数据思维去发现问题。通过本质思维去分析问题，通过效率思维去解决问题。最后通过标准化方法将解决问题的方案产品化。</p>
+<p>————————————————</p>
+<h2 id="四-补充">四、补充</h2>
+<p>产品思维也是一种从用户、场景、触达等转化链路出发，完成目标的思考方式。</p>
+<p>一般思考步骤：</p>
+<p>step1：产品需求层次。</p>
+<p>一般都会深入到马斯洛需求层次理论。（<font color="/#bff">越接近需求层次底端的产品越容易被接受</font>）</p>
+<p>Step2：人群画像</p>
+<p>要思考目标用户是谁？</p>
+<p>Step3:用户场景</p>
+<p>什么场景下，会需要到这个产品</p>
+<p>Step4:产品改进</p>
+<p>Step5:宣传&amp;营销</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 需要具备的基本素质]]></title>
+        <id>https://iraxu.github.io/post/pm0006/</id>
+        <link href="https://iraxu.github.io/post/pm0006/">
+        </link>
+        <updated>2023-12-19T01:29:26.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="一-热情">一、热情</h2>
+<p>做好用户眼里的好产品挺难的，需要做很多事情，热情才能坚持下去。</p>
+<p>其中还会包含好奇心，长期抱有学习的心态。</p>
+<h2 id="二-同理心">二、同理心</h2>
+<p>凡事能站在用户的角度去想、思考，体会痛点。</p>
+<h2 id="三-执行力和自驱力">三、执行力和自驱力</h2>
+<p>能清楚地分解任务找资源人落地。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[碎碎念 - 黑苹果主机规划]]></title>
+        <id>https://iraxu.github.io/post/Chat_Hackintosh/</id>
+        <link href="https://iraxu.github.io/post/Chat_Hackintosh/">
+        </link>
+        <updated>2023-12-18T10:12:53.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="准备组一台amd的黑苹果主机用于办公暂定配置如下">准备组一台AMD的黑苹果主机用于办公，暂定配置如下</h3>
+<h2 id="系统配置">系统配置</h2>
+<table>
+<thead>
+<tr>
+<th>规格</th>
+<th>详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>AMD Ryzen 7 5800H</td>
+</tr>
+<tr>
+<td>RAM</td>
+<td>Asgard DDR4 16G 3200MHz *2</td>
+</tr>
+<tr>
+<td>SSD 1</td>
+<td>HITAI TI600 1T</td>
+</tr>
+<tr>
+<td>SSD 2</td>
+<td>----</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>AMD Radeon Graphics 3GB</td>
+</tr>
+<tr>
+<td>Wi-Fi</td>
+<td>Intel  AX200</td>
+</tr>
+</tbody>
+</table>
+<h2 id="应用版本">应用版本</h2>
+<table>
+<thead>
+<tr>
+<th>规格</th>
+<th>详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BIOS</td>
+<td>5800H502</td>
+</tr>
+<tr>
+<td>OC</td>
+<td>0.9.4</td>
+</tr>
+<tr>
+<td>OS</td>
+<td>macOS Big Sur</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 产品经理的分类]]></title>
+        <id>https://iraxu.github.io/post/pm0005/</id>
+        <link href="https://iraxu.github.io/post/pm0005/">
+        </link>
+        <updated>2023-12-18T07:30:28.000Z</updated>
+        <content type="html"><![CDATA[<p>产品经理的分类：</p>
+<ol>
+<li>
+<h3 id="按服务对象划分">按服务对象划分</h3>
+</li>
+</ol>
+<ul>
+<li>
+<h5 id="c端面向群众">C端（面向群众）</h5>
+<p>注重用户体验和用户需求的挖掘和满足。</p>
+</li>
+<li>
+<h5 id="b端面向企业">B端（面向企业）</h5>
+<p>业务抽象化。提高标准化程度或提高业务效率、逻辑思维能力和全局观念。</p>
+</li>
+</ul>
+<ol start="2">
+<li>
+<h3 id="按前后端划分">按前后端划分</h3>
+</li>
+</ol>
+<ul>
+<li>
+<h5 id="前端">前端</h5>
+</li>
+<li>
+<h5 id="中台">中台</h5>
+</li>
+<li>
+<h5 id="后端">后端</h5>
+</li>
+</ul>
+<ol start="3">
+<li>
+<h3 id="按工作内容划分">按工作内容划分</h3>
+</li>
+</ol>
+<ul>
+<li>
+<h5 id="用户pm">用户PM</h5>
+<p>也叫用户体验PM，交互PM，是直接面向用户，实现业务。</p>
+</li>
+<li>
+<h5 id="商业pm">商业PM</h5>
+<p>围绕最大化程度实现产品的盈利点，挖掘商业潜能，最大化实现产品价值，为企业实现更大利润。</p>
+</li>
+<li>
+<h5 id="策略pm">策略PM</h5>
+<p>研究和制定公司的业务策略，战略布局，调整产品策略和业务方向。</p>
+</li>
+<li>
+<h5 id="数据pm">数据PM</h5>
+<p>负责从数据维度出发分析业务，搭建业务框架，用数据的手段提升整体业务水平，为其他团队提供数据支撑等。</p>
+</li>
+<li>
+<h5 id="aipm">AIPM</h5>
+<p>负责AI相关项目的规划和设计。</p>
+</li>
+<li>
+<h5 id="平台pm">平台PM</h5>
+<p>主要从整个全局架构角度出发，高度抽象业务现象、提炼业务本质，从功能、平台、机制三维度综合搭建整个平台服务，为公司整体提供服务。</p>
+</li>
+</ul>
+<p>面试中，面试官问这个问题，可以和应聘公司相结合。</p>
+<p>主要分为C端：像阿里的淘宝和天猫（像字节的抖音）；B端：像钉钉（像自己的飞书）；中台：CRM等</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[产品经理的学习之路 - 产品分析报告模板]]></title>
+        <id>https://iraxu.github.io/post/pm0004/</id>
+        <link href="https://iraxu.github.io/post/pm0004/">
+        </link>
+        <updated>2023-12-16T07:27:42.000Z</updated>
+        <content type="html"><![CDATA[<p>一、产品概述</p>
+<h4 id="11-产品名称">1.1 产品名称</h4>
+<h4 id="12-产品版本">1.2 产品版本</h4>
+<h4 id="13-产品定位">1.3 产品定位</h4>
+<h4 id="14-产品介绍">1.4 产品介绍</h4>
+<h4 id="15-产品slogan">1.5 产品slogan</h4>
+<h3 id="二-产品逻辑分析">二、产品逻辑分析</h3>
+<h4 id="21-产品特色创新模式">2.1 产品特色（创新模式）</h4>
+<h4 id="22-产品结构">2.2 产品结构</h4>
+<h4 id="23-产品业务逻辑流程图">2.3 产品业务逻辑流程图</h4>
+<h3 id="三-需求分析和用户画像">三、需求分析和用户画像</h3>
+<h4 id="31-需求分析">3.1 需求分析</h4>
+<h5 id="311-基本型需求">3.1.1 基本型需求</h5>
+<h5 id="312-期望型需求">3.1.2 期望型需求</h5>
+<h5 id="313-兴奋型需求">3.1.3 兴奋型需求</h5>
+<h4 id="32-用户画像">3.2 用户画像</h4>
+<h5 id="321-用户性别和年龄分布">3.2.1 用户性别和年龄分布</h5>
+<h5 id="322-用户区域及占比">3.2.2 用户区域及占比</h5>
+<h5 id="323-典型用户画像">3.2.3 典型用户画像</h5>
+<h3 id="四-市场状况">四、市场状况</h3>
+<h4 id="41-市场份额">4.1 市场份额</h4>
+<h4 id="42-市场数据分析">4.2 市场数据分析</h4>
+<h3 id="五-产品功能分析">五、产品功能分析</h3>
+<p>核心功能、特色功能</p>
+<h3 id="六-竞品分析">六、竞品分析</h3>
+<p>注意：这里不要很详细，用一张表格来总结即可。</p>
+<h3 id="七-总结">七、总结</h3>
+]]></content>
+    </entry>
+</feed>

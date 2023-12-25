@@ -1,0 +1,216 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>X&#39; Blog</title>
+<link rel="shortcut icon" href="https://iraxu.github.io/favicon.ico" />
+<link
+  href="https://fastly.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css"
+  rel="stylesheet" />
+<link
+  rel="stylesheet"
+  href="https://fastly.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css" />
+<link
+  rel="stylesheet"
+  href="https://iraxu.github.io/media/css/tailwind.css" />
+<link rel="stylesheet" href="https://iraxu.github.io/styles/main.css" />
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="X&#39; Blog - Atom Feed"
+  href="https://iraxu.github.io/atom.xml" />
+
+
+
+    <meta name="description" content="金风玉露一相逢，便胜却人间无数" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/Xalaok/Fonts@main/LXGWWenKaiLite/bold.woff2" as="font" type="font/woff2" crossorigin>
+  </head>
+  <body>
+    <div class="antialiased flex flex-col min-h-screen" id="app">
+      <div
+  class="nav py-3 md:py-8 fixed w-full z-10 bg-gray-50 dark:bg-gray-700 transition-all duration-300"
+  :class="{ 'scroll': scrolled }">
+  <div class="flex justify-end px-4">
+    <div
+      class="w-8 h-8 flex justify-center items-center rounded-full md:hidden"
+      @click="showMenu = !showMenu">
+      <i class="ri-close-line" v-show="showMenu"></i>
+      <i class="ri-menu-3-line" v-show="!showMenu"></i>
+    </div>
+  </div>
+  <nav
+    class="max-w-4xl w-full mx-auto text-center flex flex-col md:flex-row justify-center md:block"
+    :class="`${ showMenu ? 'block' : 'hidden' }`">
+    
+    <a
+      href="/"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      首页
+    </a>
+    
+    <a
+      href="/archives"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      归档
+    </a>
+    
+    <a
+      href="/tags"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      标签
+    </a>
+    
+    <a
+      href="/post/about"
+      target=""
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      关于
+    </a>
+    
+    <a
+      href="https://iraxu.github.io/atom.xml"
+      target="_blank"
+      class="py-2 md:py-1 px-4 mx-4 inline-flex transition font-semibold rounded dark:hover:bg-gray-600 hover:bg-gray-200">
+      RSS
+    </a>
+  </nav>
+</div>
+
+      <div class="max-w-4xl w-full mx-auto pt-32">
+        <div
+          class="py-8 shadow-box bg-white dark:bg-gray-600 border-gray-300 rounded-none md:rounded-lg -mx-1 md:mx-0 md:px-0">
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/e_8CDh5oa/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              Python（1）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/uGDy0T-XuX/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              Merry Christmas（1）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/DyFdqqaiQz/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              开发（2）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/xxmsYk7Ps/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              软件测试（2）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/LgZz6wuf5/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              产品经理（9）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/i0Z4RReCqP/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              Product manager（9）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/Oyn52O3zhw/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              产品经理的学习之路（9）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/KRUyNhoYD/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              Android（1）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/Ry5NFoiePD/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              自动化（1）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/WYIPeTERn/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              Hackintosh（1）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/hEssEPWg5l/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              黑苹果（1）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/_NX-Ujyztg/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              碎碎念（1）
+            </a>
+          </div>
+          
+          <div class="px-8 pb-5 inline-flex relative overflow-hidden">
+            <a
+              href="https://iraxu.github.io/tag/h40xYnnldh/"
+              class="text-gray-700 dark:text-gray-200 border-b-2 border-dotted border-gray-200 dark:border-gray-400 dark:hover:border-gray-200 hover:border-gray-600 transition-all duration-100">
+              <i class="ri-hashtag"></i>
+              日常（1）
+            </a>
+          </div>
+          
+        </div>
+        <footer class="py-12 text-center px-4 md:px-0" v-pre>
+  产品要么是剽窃，要么是革命
+<p class="douyin">♥</p>
+</footer>
+
+      </div>
+    </div>
+    <script src="https://fastly.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://iraxu.github.io/media/scripts/main.js"></script>
+  </body>
+</html>
